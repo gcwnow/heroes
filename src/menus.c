@@ -2208,6 +2208,7 @@ void
 enter_your_name (char c, char* name)
 {
   a_keycode t = 0;
+  char nameChar = 65;
   int pos = 0;
   char head[256];
   a_timer pixelize_timer = new_htimer (T_GLOBAL, HZ (7));
@@ -2242,7 +2243,56 @@ enter_your_name (char c, char* name)
 	flush_display (corner[0]);
       }
     }
+
+    /* New arcade style input */
     if (key_ready ()) {
+	    t = get_key ();
+
+	    if(t == HK_Up) {
+		nameChar++;
+	    }
+	    if(t == HK_Down) {
+		nameChar--;
+	    }
+	    if(t == HK_Left) {
+		name[pos] = 0;
+		event_sfx (71);
+		FREE_SPRITE0 (player_name); /* force recompilation */
+		pos--;
+	        if(pos < 0) {
+		    pos = 0;
+	        }
+		nameChar = (char)name[pos];
+	    }
+	    if(t == HK_Right) {
+		pos++;
+	        if(pos >= PLAYER_NAME_SIZE) {
+		     pos = PLAYER_NAME_SIZE - 1;
+	        }
+		if(name[pos] == 0) {
+			nameChar = 65;
+		}
+		else {
+			nameChar = (char)name[pos];
+		}
+	    }
+
+	    if(nameChar < 65) {
+		nameChar = 90;
+	    }
+	    else if(nameChar > 90) {
+		nameChar = 65;
+	    }
+    }
+
+    if((int)nameChar != name[pos]) {
+	    name[pos] = (int)nameChar;
+	    event_sfx (70);
+	    FREE_SPRITE0 (player_name); /* force recompilation */
+    }
+
+    /* Old keyboard input */
+    /*if (key_ready ()) {
       t = get_key ();
       if (pos < PLAYER_NAME_SIZE) {
 	int a = TOUPPER (keycode_to_ascii (t));
@@ -2250,16 +2300,16 @@ enter_your_name (char c, char* name)
 	  name[pos++] = a;
 	  name[pos] = 0;
 	  event_sfx (70);
-	  FREE_SPRITE0 (player_name); /* force recompilation */
+	  FREE_SPRITE0 (player_name); // force recompilation
 	}
       }
       if ((t == HK_BackSpace || t == HK_Delete) && (pos > 0)) {
 	pos--;
 	name[pos] = 0;
 	event_sfx (71);
-	FREE_SPRITE0 (player_name); /* force recompilation */
+	FREE_SPRITE0 (player_name); // force recompilation
       }
-    }
+    } */
   } while (t != HK_Escape && t != HK_Enter);
   event_sfx (72);
   if (pos == 0 || t == HK_Escape)

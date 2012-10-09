@@ -218,6 +218,12 @@ person = {
 };
 
 person = {
+  name    = "Artur Rojek";
+  email   = zeartul@gmail.com;
+  port    = "OpenDingux A320/GCW0";
+};
+
+person = {
   name    = "Maxim Sobolev";
   email   = sobomax@FreeBSD.org;
   port    = FreeBSD;

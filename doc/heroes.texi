@@ -511,6 +511,8 @@ Latin-1 characters in fonts.
 @item
 @email{f91-men@@nada.kth.se,Mattias Engdeg@aa{}rd} (Solaris)
 @item
+@email{zeartul@@gmail.com,Artur Rojek} (OpenDingux A320/GCW0)
+@item
 @email{sobomax@@FreeBSD.org,Maxim Sobolev} (FreeBSD)
 @end itemize
 @c END == PEOPLE == DO NOT CHANGE THIS COMMENT
@@ -1268,11 +1270,11 @@ be printed using the @samp{--list=debug} option).
 
 @table @samp
 @item SECTION
-The different parts of the game (introduction,
+The different parts of the game (introduction, 
 demonstration, menus, ...).
 
 @item SYSTEM
-Handling of environment variables, creation of
+Handling of environment variables, creation of 
 directories, initialization of libraries.
 
 @item RESOURCE
