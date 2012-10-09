@@ -1,0 +1,244 @@
+autogen definitions people;
+/*
+** This file record informations about all people which have
+** contributed to Heroes in some ways.  Each person is
+** described in a `person' block with the following attributes:
+**
+**   name:    the full name
+**   aka:     pseudo, or alternate name
+**   email:   the email address
+**   www:     the home page address
+**   author:  authors' contributions
+**   contrib: what the person contributed
+**   i18n:    what language have been translated
+**   package: what package the person maintain
+**   port:    which architecture the person adapted Heroes too
+**   help:    the help the person offered
+**   suggestions: (no value) if the personne suggested improvement
+**   bugs:    (no value) if the person reported bugs
+**   thanks:  another reason why the person should be thanked.
+**
+** The block are lexicographically sorted on the *last* name.
+*/
+
+person = {
+  name    = "Todd Allendorf";
+  email   = toddal@alumni.caltech.edu;
+  thanks  = "reported heroes BeOS run out of the box";
+};
+
+person = {
+  name    = "Pierre Baillet";
+  email   = octplane@via.ecp.fr;
+  contrib = "Support for non-8bits depth video mode with LibGGI.";
+};
+
+person = {
+  name    = "William Black";
+  email   = psychopheles@users.sourceforge.net;
+  bugs;
+};
+
+person = {
+  name    = "Hermann J. Beackers";
+  email   = beckers@st-oneline.de;
+  i18n    = German;
+};
+
+person = {
+  name    = "Jos Boersema";
+  email   = joshb@xs4all.nl;
+  i18n    = Dutch;
+};
+
+person = {
+  name    = "Daniel Burrows";
+  email   = Daniel_Burrows@brown.edu;
+  package = "Debian GNU/Linux";
+};
+
+person = {
+  name    = "Beiad Ian Q. Dalton";
+  email   = idalton@ferret.phonewave.net;
+  bugs;
+};
+
+person = {
+  name    = "Luzemario Dantas Rocha";
+  email   = luza.solucao@uol.com.br;
+  i18n    = "Brazilian Portuguese";
+};
+
+person = {
+  name    = "Jean Delvare";
+  email   = delvare@ensicaen.ismra.fr;
+  package = "RPM & Slackware Linux";
+  suggestions;
+  bugs;
+};
+
+person = {
+  name    = "Stéphane Denis";
+  email   = S.Denis@darkworks.com;
+  port    = "Win/Visual C";
+  help    = "Windows advices";
+};
+
+person = {
+  name    = "Alessandro Dotti";
+  email   = alessandro.dotti@libero.it;
+  i18n    = Italian;
+};
+
+person = {
+  name    = "Laurent Duperval";
+  email   = lduperval@microcelli5.com;
+  suggestions;
+};
+
+person = {
+  name    = "Alexandre Duret-Lutz";
+  email   = duret_g@epita.fr;
+  aka     = Pollux;
+  www     = http://www.epita.fr/~duret_g/;
+  i18n    = French;
+  author  = "Wrote the original source code, ported it to GNU/Linux
+and created a few levels.";
+};
+
+person = {
+  name    = "Christoph Egger";
+  email   = Christoph_Egger@t-online.de;
+  thanks  = "Sent useful comments about BUGS and TODO.";
+};
+
+person = {
+  name    = "Mattias Engdegård";
+  email   = f91-men@nada.kth.se;
+  port    = Solaris;
+  bugs;
+};
+
+person = {
+  name    = "Romual Genevois";
+  aka     = Guen;
+  email   = rgenevois@besancon.net;
+  www     = http://www.romualdgenevois.com/;
+  author  = "Had the idea of that game, designed most of it,
+drew the graphics, created most of the levels.";
+};
+
+person = {
+  name    = "Gregory Giannoni";
+  email   = gianno_g@epita.fr;
+  suggestions = "Asked for --quadruple";
+};
+
+person = {
+  name    = "Uwe Hermann";
+  email   = uh1763@bingo-ev.de;
+  contrib = "Clean-ups and portability fixes.";
+};
+
+person = {
+  name    = "Janos Holanyi";
+  email   = csani@lme.linux.hu;
+  bugs;
+};
+
+person = {
+  name    = "Wolfgang Holzinger";
+  email   = wholzi@gmx.at;
+  bugs;
+};
+
+person = {
+  name    = "Brian S. Julin";
+  email   = bri@tull.umassp.edu;
+  bugs;
+};
+
+person = {
+  name    = "Jesper Kjolsrud";
+  email   = jeppe@dneg.com;
+  thanks  = "Reported the Heroes runs on IRIX out of the box.";
+};
+
+person = {
+  name    = "Alexandre Liverneaux";
+  aka     = Alexel;
+  email   = alex.livernaux@wanadoo.fr;
+  www     = http://alexel.planet-d.net/;
+  author  = "Composed the soundtracks.";
+};
+
+person = {
+  name    = "Eugenia Loli-Queru";
+  email   = eloli@hotmail.com;
+  package = BeOS;
+};
+
+person = {
+  name    = "Philippe Meisburger";
+  aka     = TNK;
+  email   = philmeis@mail.dotcom.fr;
+  www     = http://perso.club-internet.fr/philmeis/;
+  author  = "Composed the soundtracks and created some levels.";
+};
+
+person = {
+  name    = "David Olofson";
+  email   = david.olofson@reologica.se;
+  bugs;
+};
+
+person = {
+  name    = "Raphaël Poss";
+  email   = raphael.poss@epita.fr;
+  bugs;
+};
+
+person = {
+  name    = "Thomas Pospisek";
+  email   =  tpo_deb@sourcepole.ch;
+  bugs;
+};
+
+person = {
+  name    = "Benjamin Preidecker";
+  email   = bpreidecker@gmx.de;
+  bugs;
+};
+
+person = {
+  name    = "Pascal Rigaux";
+  aka     = pixel;
+  email   = pixel@mandrakesoft.com;
+  package = Linux-Mandrake;
+};
+
+person = {
+  name    = "Maxim Sobolev";
+  email   = sobomax@FreeBSD.org;
+  port    = FreeBSD;
+  package = FreeBSD;
+};
+
+person = {
+  name    = "Christian T. Steigies";
+  email   = cts@debian.org;
+  bugs;
+};
+
+person = {
+  name    = "Eero Tamminen";
+  email   = oak@welho.com;
+  bugs;
+};
+
+person = {
+  name    = "Ingo van Lil";
+  email   = inguin@gmx.de;
+  i18n    = German;
+  contrib = "Latin-1 characters in fonts.";
+};

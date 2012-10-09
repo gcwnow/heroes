@@ -1,0 +1,588 @@
+This is heroes.info, produced by makeinfo version 4.1 from heroes.texi.
+
+INFO-DIR-SECTION Games
+START-INFO-DIR-ENTRY
+* Heroes: (heroes).              A Nibbles clone, just better.
+* heroeslvl: (heroes)heroeslvl.  Inspect Heroes levels.
+END-INFO-DIR-ENTRY
+
+   This file documents Heroes, a Nibbles clone, just better.
+
+   Copyright 2000, 2001  Alexandre Duret-Lutz
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, provided also
+that the sections entitled "Copying" and "GNU General Public License"
+are included exactly as in the original, and provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation approved by the Free Software Foundation.
+
+
+File: heroes.info,  Node: Level editor,  Next: Troubleshooting,  Prev: Game,  Up: Running
+
+Level editor
+============
+
+   The level editor is available from the `editor' entry in the main
+menu.  Created levels will be stored in your `~/.heroes/levels'
+directory.
+
+   This editor is a cut down version of the one that served us to build
+all 100 levels of this game.  This one will allow you to construct your
+own levels in a quite simplified manner.
+
+   On the left side of the screen, you can see a part of your level.
+You can move with keyboard or mouse (read the two next sections).  In
+the middle of the screen you can see the set of all the available tiles.
+You will pick tiles here to build you level.  And on the right there is
+some informations about the level and the selected (orange box) tile.
+
+* Menu:
+
+* editor-keys::                 Key used in the level editor.
+* editor-clicks::               How mouse is used in the editor.
+* tunnels::                     How to setup a tunnel.
+* sprites::                     How to setup a sprite.
+* animations::                  How to setup animations.
+* departures::                  How to setup departures.
+
+
+File: heroes.info,  Node: editor-keys,  Next: editor-clicks,  Prev: Level editor,  Up: Level editor
+
+Editor keys
+-----------
+
+   Here is the list of keys used in the level-editor.  You will have to
+learn most of them because most of these actions are available only as
+key-bindings.
+
+`<F3>'
+     Toggle sprite and vehicle display.
+
+`<F5>'
+     Toggle collide tests display.
+
+`<ESC>'
+     Quit and save.
+
+`<Ctrl>-<Left>'
+`<Ctrl>-<Right>'
+`<Ctrl>-<Up>'
+`<Ctrl>-<Down>'
+`<Ctrl>-<PageUp>'
+`<Ctrl>-<PageDown>'
+`<Ctrl>-<Home>'
+`<Ctrl>-<End>'
+     Move the cursor in the tiles side.
+
+`<Left>'
+`<Right>'
+`<Up>'
+`<Down>'
+     Move the cursor in the level side.
+
+`<SPC>'
+     Copy a tile.
+
+`<d>'
+     Setup starting positions on the selected tile.
+
+`<Ctrl>-<f>'
+     Fill the whole level with the selected tile.
+
+`<Meta>-<f>'
+`<Alt>-<f>'
+     Fill the whole level with the two first tiles (for the 10th set of
+     tiles).
+
+`<p>'
+     Output the level map as a big `pcx' file.  The file is saved in the
+     current directory, and the file name is made by appending `.pcx' to
+     the level name.
+
+`<s>'
+     Copy a sprite, or remove a sprite.
+
+`<t>'
+     Select the tile for tunnel destination.
+
+`<RET>'
+     View the level map in full screen.
+
+`<Ctrl>-<RET>'
+     Play animations.
+
+
+File: heroes.info,  Node: editor-clicks,  Next: tunnels,  Prev: editor-keys,  Up: Level editor
+
+Editor clicks
+-------------
+
+   You can select a tiles by clicking on it with the left mouse button.
+Keeping this button pulled down will allow you to move the map without
+using the keyboard.
+
+   The middle button (if you have one) used in the left side will
+temporally select a tile, as if you were using the `t' key.
+
+   The right button, used in the left side, will copy a tile to the
+pointed tile, in a way it behaves like the space key.
+
+
+File: heroes.info,  Node: tunnels,  Next: sprites,  Prev: editor-clicks,  Up: Level editor
+
+Tunnels
+-------
+
+   Copy your two tiles that are the entrances of your tunnel.  Move the
+box-pointer on one, and select it if the `<t>' key (or click on it with
+the middle button).  Once you will move the pointer, this tile will
+appear in a dashed box.  Move on the second tunnel and click on the
+`[GO TO]' box that is on the right of your screen.  Now you have set up
+the first way: for now if your were playing on this level you could go
+from this place to the dashed one, but from the dashed to this one.  So
+you also have to set up the tunnel in the other way: select the current
+tiles with `<t>', move on the former and click on `[GO TO]'. That's all.
+
+   Notice that with this technique you can also typeset some kind of
+triangular tunnel. Let `A', `B', `C' be the entrances, you could setup
+the way like that `A->B', `B->C', and `C->A'.
+
+   The coordinate `0x0' if used for the destination denotes a non-setup
+way.  That's why you can't put a tunnel on the `0x0' position.
+
+
+File: heroes.info,  Node: sprites,  Next: animations,  Prev: tunnels,  Up: Level editor
+
+Sprites
+-------
+
+   With some set of tiles (like the Egyptian one), there are tiles (like
+palm trees) designed to be used as `sprites', i.e. put over others with
+transparency. You have to use the `<s>' key for this:
+
+   * copy the ground tile with `<SPC>' or the first button
+
+   * copy the sprite tile with `<s>' (and if you don't see any sprite on
+     the level, press `<F3>').
+
+
+File: heroes.info,  Node: animations,  Next: departures,  Prev: sprites,  Up: Level editor
+
+Animations
+----------
+
+   You may have noticed that during the game, some tiles are animated:
+color cycle (like the speed arrows) or moving objects (ventilators).
+Each frame of an animation is actually a separate tile.  The different
+tiles of an animations are drawn horizontally in the sets.  To setup an
+animation, you just have to select the first one and copy it into your
+level.  Optionally, press `<Ctrl>-<RET>' to see the animation.  When
+the orange box is on an animated tile, you should find a button on the
+right to modify the speed: the greater the number is, the slower the
+animation goes.
+
+
+File: heroes.info,  Node: departures,  Prev: animations,  Up: Level editor
+
+Departures
+----------
+
+   Select a tile and press the `<d>' key. Then look at the right side,
+select a color and click on the arrow you want (if you don't see any
+vehicle on the level, press `<F3>').
+
+
+File: heroes.info,  Node: Troubleshooting,  Prev: Level editor,  Up: Running
+
+Troubleshooting
+===============
+
+Video mode
+----------
+
+   This game was primary made for MS-DOS, with VGA 320x200x8bits
+display.  If GGI is used to manage the video modes and you run into
+trouble with video modes, I suggest you play with a environment
+variable called `GGI_DISPLAY' used to select the display used.  LibGGI
+come with a file `env.txt' that describes this variable.  As an
+alternative you may use heroes' `--gfx-options' option instead of the
+above variable.  If you want to force X display, you can add a line
+     Options: --gfx-options=X
+   in your `~/.heroes/heroesrc' file.  Note: `--gfx-options' has no
+effect if you are using SDL.
+
+   We suggest you to run the game under X because in console modes
+(libvga, frame buffers, ...) it's easy to get stuck if the game freeze.
+
+   People using an X server that supports 8bit visuals although the
+default visual is not 8bit (run `xdpyinfo' to see a list of visuals that
+your X server supports) are subject to what is probably a GGI bug.
+Basically GGI's X driver fails to allocate the 8bit mode correctly.
+The symptom is
+     X Error of failed request:  BadMatch (invalid parameter attributes)
+       Major opcode of failed request:  1 (X_CreateWindow)
+       Serial number of failed request:  24
+       Current serial number in output stream:  31
+   One workaround is to prevent Heroes from negociating a 8bit video
+mode.  Specify `--gfx-options not8' to that effect.  The default visual
+depth for your server will then be selected by GGI.  (Of course this is
+slower because Heroes internally works in 8bit mode; use of another
+display depth involves a conversion.)
+
+Keyboard
+--------
+
+   There is a menu `KEYS' in the submenu `OPTIONS' that lets you change
+the key bindings used during the game.  Please set the keys here before
+playing since key codes can vary from place to place (hmm...  is that
+right?).
+
+Sound effects
+-------------
+
+   You may find that there is some delay between an action and the
+associated sound effect.  This is because libmikmod is polling in a
+buffer and is thus always one buffer ahead in the playback. It is
+possible to reduce the size of that buffer using some driver parameters,
+please see the section `DRIVER PARAMETERS' of libmikmod's `README'.  For
+instance I'm using the OSS driver and I reduce the size of libmikmod's
+buffer by running heroes with the line
+     Options: -d3,buffer=11,count=4
+   in my `~/.heroes/heroesrc' file.  If you can find correct values for
+other drivers, please send them to me <duret_g@epita.fr>!
+
+Sound errors
+------------
+
+   If Heroes try to tell you that:
+     Could not initialize sound, reason: Could not set sample size
+   That means that MikMod couldn't setup the 16bits output, may be
+because your sound card doesn't support that.  Use the `-8' option to
+have the game running with 8bits sound output.
+
+   If you get:
+     Could not initialize sound, reason: Could not set mono/stereo setting
+   You will have to run the game with `-m', because stereo is not
+available.
+
+   Remember that you can always put these options in your
+`~/.heroes/heroes' file (*note heroesrc::) so that you don't need to
+type them every time you run the game.
+
+SegFault when using Alsa drivers with and LibMikMod
+---------------------------------------------------
+
+   If you are using Alsa 0.5.x drivers(1) Heroes is likely to crash
+during it's startup.  This is because the current version of LibMikMod
+(3.1.9 at the time of writing) lacks support for Alsa 0.5.
+
+   A solution is to run Alsa in OSS-emulation mode: simply run `heroes
+-d x' (where x is the OSS driver number printed by `heroes -n') to
+force LibMikMod using its OSS(2) interface.
+
+   As a more general solution, you may want to compile LibMikMod
+without Alsa support (`./configure --disable-alsa') so that it never
+crash for any application.
+
+   ---------- Footnotes ----------
+
+   (1) Alsa is a project to improve the Linux sound subsystem
+(See the Alsa page (http://www.alsa-project.org/) for details).
+
+   (2) Open Sound System is a set of device drivers that provide a
+uniform API across all the major UNIX architectures.  The Linux kernel
+contain free code from the commercial OSS (See this page
+(http://www.linux.org.uk/OSS/) for details).
+
+
+File: heroes.info,  Node: heroeslvl,  Next: Index,  Prev: Running,  Up: Top
+
+`heroeslvl'
+***********
+
+   `heroeslvl' is a tool that can be used to inspect the content of
+Heroes level files.  This is of almost no interest to the usual Heroes
+player, but can sometime be helpful to find bugs in levels.
+
+* Menu:
+
+* Invoking heroeslvl::          heroeslvl launch-time options
+
+
+File: heroes.info,  Node: Invoking heroeslvl,  Prev: heroeslvl,  Up: heroeslvl
+
+`heroeslvl' options
+===================
+
+   `heroeslvl' takes a list of levels to inspect in argument, and
+support the following options.
+
+   When no options are given, `heroeslvl' defaults to `-ipfh'.
+
+`-v'
+`--version'
+     Display `heroeslvl' version number and copyright informations.
+
+`-h'
+`--help'
+     Print a help message about these run-time options.
+
+`-p WHAT'
+`--print=WHAT'
+     Select what information `heroeslvl' should display. `WHAT' can be
+     one or more of the following characters.
+
+    `d'
+          Print square directions.  Square directions are used on
+          tunnel to indicate the entrance direction, and on speed tiles
+          to indicate the direction of the acceleration.
+
+    `f'
+          Print the filename of each processed file.
+
+    `h'
+          Print header information.  This include level size,
+          soundtrack and tilesets to use, starting positions...
+
+    `i'
+          Print tile details.  This will display a list of all tiles,
+          along with some of their attributes (type of the tile, adress
+          of its sprite, animation information).
+
+    `t'
+          Print square type map.  Display a map of the level, rendering
+          each square with a character indicating the square type.
+
+    `T'
+          Display the character used as type keys in the `-pt' output.
+
+    `w'
+          Print wall map.  Display a map of the level, rendering each
+          square with a character indicating the number of neighboring
+          walls.  (Walls are just bits indicating the directions that
+          can be used to exit from a square; they not always map to
+          something visible on the level.)
+
+    `@'
+          Print the list of tunnels, with position, direction, and
+          destination.
+
+`-i'
+`--indent'
+     Indent everything but the filenames of each level processed.  Note
+     that filenames are only displayed if requested by `-pf'.
+
+
+File: heroes.info,  Node: Index,  Prev: heroeslvl,  Up: Top
+
+Index
+*****
+
+* Menu:
+
+* -2:                                    Invoking heroes.
+* -3:                                    Invoking heroes.
+* -4:                                    Invoking heroes.
+* -8:                                    Invoking heroes.
+* -8bits:                                Invoking heroes.
+* -cpu-off:                              Invoking heroes.
+* -d N[,OPTIONS]:                        Invoking heroes.
+* -default-options:                      Invoking heroes.
+* -default-saves:                        Invoking heroes.
+* -default-scores:                       Invoking heroes.
+* -disable-debug:                        configure options.
+* -disable-display:                      configure options.
+* -disable-heroes-debug:                 configure options.
+* -disable-joystick:                     configure options.
+* -disable-optimizations:                configure options.
+* -disable-sound:                        configure options.
+* -double:                               Invoking heroes.
+* -driver=N[,OPTIONS]:                   Invoking heroes.
+* -e:                                    Invoking heroes.
+* -enable-assert:                        configure options.
+* -enable-debug:                         configure options.
+* -enable-devel:                         configure options.
+* -enable-gprof:                         configure options.
+* -enable-html-doc[=DIR]:                configure options.
+* -enable-mem-debug:                     configure options.
+* -enable-warnings:                      configure options.
+* -even-lines:                           Invoking heroes.
+* -F:                                    Invoking heroes.
+* -full-screen:                          Invoking heroes.
+* -g:                                    Invoking heroes.
+* -G OPTIONS:                            Invoking heroes.
+* -gfx-options:                          Troubleshooting.
+* -gfx-options=OPTIONS:                  Invoking heroes.
+* -go:                                   Invoking heroes.
+* -h <1>:                                Invoking heroeslvl.
+* -h:                                    Invoking heroes.
+* -help <1>:                             Invoking heroeslvl.
+* -help:                                 Invoking heroes.
+* -high-quality:                         Invoking heroes.
+* -i <1>:                                Invoking heroeslvl.
+* -i:                                    Invoking heroes.
+* -indent:                               Invoking heroeslvl.
+* -J:                                    Invoking heroes.
+* -list=WORD:                            Invoking heroes.
+* -lWORD:                                Invoking heroes.
+* -m:                                    Invoking heroes.
+* -mono:                                 Invoking heroes.
+* -no-double-fx:                         Invoking heroes.
+* -no-joystick:                          Invoking heroes.
+* -p:                                    Invoking heroeslvl.
+* -p@:                                   Invoking heroeslvl.
+* -pd:                                   Invoking heroeslvl.
+* -pf:                                   Invoking heroeslvl.
+* -ph:                                   Invoking heroeslvl.
+* -pi:                                   Invoking heroeslvl.
+* -print:                                Invoking heroeslvl.
+* -pT:                                   Invoking heroeslvl.
+* -pt:                                   Invoking heroeslvl.
+* -pw:                                   Invoking heroeslvl.
+* -Q:                                    Invoking heroes.
+* -q:                                    Invoking heroes.
+* -quadruple:                            Invoking heroes.
+* -quiet:                                Invoking heroes.
+* -really-quiet:                         Invoking heroes.
+* -s:                                    Invoking heroes.
+* -swap-sides:                           Invoking heroes.
+* -triple:                               Invoking heroes.
+* -v <1>:                                Invoking heroeslvl.
+* -v:                                    Invoking heroes.
+* -verbose=CHANNELS:                     Invoking heroes.
+* -version <1>:                          Invoking heroeslvl.
+* -version:                              Invoking heroes.
+* -vOPTIONS:                             Invoking heroes.
+* -with-allegro:                         configure options.
+* -with-dmalloc:                         configure options.
+* -with-efence:                          configure options.
+* -with-ggi:                             configure options.
+* -with-mikmod:                          configure options.
+* -with-mpatrol:                         configure options.
+* -with-mtrace:                          configure options.
+* -with-sdl:                             configure options.
+* -with-sdl-mixer[=DIR]:                 configure options.
+* allegro:                               Libraries.
+* Alsa:                                  Troubleshooting.
+* animations:                            animations.
+* architecture:                          Machines.
+* authors:                               People.
+* bug:                                   Bug Reporting.
+* bug report:                            Bug Reporting.
+* configure generic instructions:        configure.
+* configure options for Heroes:          configure options.
+* contributing:                          Bug Reporting.
+* contributors:                          People.
+* copying:                               Copying.
+* core dump:                             Bug Reporting.
+* delay:                                 Troubleshooting.
+* departures:                            departures.
+* diff:                                  Bug Reporting.
+* display driver:                        Invoking heroes.
+* distribution:                          Copying.
+* dmalloc:                               configure options.
+* download:                              Getting Heroes.
+* editor:                                Level editor.
+* editor clicks:                         editor-clicks.
+* editor keys:                           editor-keys.
+* efence:                                configure options.
+* environment:                           Environment.
+* environment variable:                  heroesrc.
+* errors:                                Troubleshooting.
+* extra levels directory:                heroesrc.
+* extradir:                              heroesrc.
+* file resources:                        heroesrc.
+* free:                                  Copying.
+* full screen:                           Invoking heroes.
+* game:                                  Game.
+* getting heroes:                        Getting Heroes.
+* ggi:                                   Libraries.
+* GGI_DISPLAY <1>:                       Troubleshooting.
+* GGI_DISPLAY:                           Invoking heroes.
+* gii:                                   Libraries.
+* gprof:                                 configure options.
+* heroes-announce:                       Mailing lists.
+* heroes-bugs:                           Mailing lists.
+* heroes-discuss:                        Mailing lists.
+* HEROES_DATA_DIR:                       Environment.
+* HEROES_DEBUG <1>:                      Environment.
+* HEROES_DEBUG:                          configure options.
+* HEROES_LOCALE_DIR:                     Environment.
+* HEROES_PREFIX:                         Environment.
+* heroeslvl:                             heroeslvl.
+* heroesrc:                              heroesrc.
+* history:                               History.
+* HOME:                                  Environment.
+* ibiblio:                               Getting Heroes.
+* index:                                 Index.
+* installation:                          Installation.
+* Invoking heroeslvl:                    Invoking heroeslvl.
+* keepsgid:                              heroesrc.
+* keepsuid:                              heroesrc.
+* key codes:                             Troubleshooting.
+* keyboard:                              Troubleshooting.
+* keys:                                  Troubleshooting.
+* keys, in editor:                       editor-keys.
+* level editor:                          Level editor.
+* libggi:                                Libraries.
+* libgii:                                Libraries.
+* libmikmod:                             Libraries.
+* LibMikMod and Alsa:                    Troubleshooting.
+* libraries:                             Libraries.
+* libsdl:                                Libraries.
+* machines:                              Machines.
+* metalab:                               Getting Heroes.
+* mikmod:                                Libraries.
+* mouse, in editor:                      editor-clicks.
+* mpatrol:                               configure options.
+* mtrace:                                configure options.
+* Nibbles:                               Overview.
+* options <1>:                           heroesrc.
+* options:                               Invoking heroes.
+* overview:                              Overview.
+* packagers:                             People.
+* patch:                                 Bug Reporting.
+* relocation:                            Relocatable package.
+* rights:                                Copying.
+* running:                               Running.
+* runtime options:                       Invoking heroes.
+* sdl:                                   Libraries.
+* SDL_VIDEODRIVER <1>:                   heroesrc.
+* SDL_VIDEODRIVER:                       Invoking heroes.
+* setenv:                                heroesrc.
+* setrsc:                                heroesrc.
+* sfx:                                   Troubleshooting.
+* sgid <1>:                              Global score file.
+* sgid:                                  heroesrc.
+* Simple DirectMedia Layer:              Libraries.
+* sound driver:                          Invoking heroes.
+* sound effects:                         Troubleshooting.
+* sound errors:                          Troubleshooting.
+* soundconf:                             heroesrc.
+* sprites:                               sprites.
+* stretching:                            Invoking heroes.
+* suggestions:                           Bug Reporting.
+* suid <1>:                              Global score file.
+* suid:                                  heroesrc.
+* sunsite:                               Getting Heroes.
+* target.txt:                            Invoking heroes.
+* TODO:                                  Bug Reporting.
+* translators:                           People.
+* Tron:                                  Overview.
+* troubleshooting:                       Troubleshooting.
+* tunnels:                               tunnels.
+* variable:                              heroesrc.
+* video mode:                            Troubleshooting.
+* X:                                     Troubleshooting.
+
+

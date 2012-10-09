@@ -1,0 +1,71 @@
+This is heroes.info, produced by makeinfo version 4.1 from heroes.texi.
+
+INFO-DIR-SECTION Games
+START-INFO-DIR-ENTRY
+* Heroes: (heroes).              A Nibbles clone, just better.
+* heroeslvl: (heroes)heroeslvl.  Inspect Heroes levels.
+END-INFO-DIR-ENTRY
+
+   This file documents Heroes, a Nibbles clone, just better.
+
+   Copyright 2000, 2001  Alexandre Duret-Lutz
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, provided also
+that the sections entitled "Copying" and "GNU General Public License"
+are included exactly as in the original, and provided that the entire
+resulting derived work is distributed under the terms of a permission
+notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation approved by the Free Software Foundation.
+
+
+Indirect:
+heroes.info-1: 1168
+heroes.info-2: 50454
+
+Tag Table:
+(Indirect)
+Node: Top1168
+Node: Copying3301
+Ref: Copying-Footnote-14967
+Node: Overview5052
+Node: Getting Heroes6756
+Node: Mailing lists8587
+Node: Bug Reporting9597
+Node: People12013
+Node: History13946
+Node: Installation17032
+Node: Libraries17513
+Node: configure19777
+Node: configure options19960
+Node: Relocatable package24490
+Node: Machines25958
+Node: Running29609
+Node: Invoking heroes30137
+Node: Environment38192
+Node: heroesrc41280
+Node: Global score file46384
+Node: Game50181
+Node: Level editor50454
+Node: editor-keys51621
+Node: editor-clicks52897
+Node: tunnels53438
+Node: sprites54513
+Node: animations54986
+Node: departures55683
+Node: Troubleshooting55962
+Ref: Troubleshooting-Footnote-159904
+Ref: Troubleshooting-Footnote-260031
+Node: heroeslvl60272
+Node: Invoking heroeslvl60648
+Node: Index62643
+
+End Tag Table

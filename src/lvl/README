@@ -1,0 +1,25 @@
+This directory holds the code in charge of loading the level files and
+converting them to an internal, easier-to-use, representation.
+
+Levels files are made of a 64 byte header, containing level-wide
+informations such as dimensions or sound track to play, followed by a
+succession of 16 byte records, one record per tile.  See the files
+de_head.c and de_body.c for precise details about the format of the
+header or the records.
+
+Level files used to be loaded directly by `load_level()' and stored
+into a variable of type a_level_header and an array of type
+a_tile_info[].  a_level_header and a_tile_info being (packed) C
+structs expressing the level file format.  The game was then dealing
+directly with these data.  This had some drawbacks (portability issue,
+impossibility to change the level format in the future, ...), hence
+the creation of this library.
+
+Today, this library is used for loading levels in Heroes (before
+playing), and by the `heroeslvl' utility.  The level editor included
+in Heroes is still using the old level loading/saving scheme, because
+libhlvl is not yet able to load tilesets (moreover the level editor
+still uses the old level representation, not the one offered by
+libhlvl).  Changing the level editor and libhlvl to work together is
+one of the not trivial tasks to do (it will probably involve a lot of
+cleaning in hedlite.c, one of the ugliest files among this game).

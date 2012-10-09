@@ -1,0 +1,380 @@
+ *******************************************************************
+ *                                                                 *
+ *  These are bugs which have been reported but never acted upon,  *
+ *  because they are unreproducible, obscure, or whatever.         *
+ *                                                                 *
+ *  If you are experiencing one of these bug, please REPORT IT,    *
+ *  even if it is alredy listed here.  The more reports we get     *
+ *  about a bug, the more details we have, and the greater the     *
+ *  chances to understand it are.                                  *
+ *                                                                 *
+ *******************************************************************
+
+======================================================================
+
+From: "Christian T. Steigies" <cts@debian.org>
+Date: Wed, 30 Aug 2000 17:49:34 +0200
+Version: 0.6pre3
+
+Hi,
+On Wed, Aug 30, 2000 at 05:31:27PM +0200, Alexandre Duret-Lutz wrote:
+
+> Have you seen other things in 0.6pre3 that would require cleanup?
+Seems my mail from home has not come through... I built a complete set of
+(debian) heroes packages on m68k, no problem. However it does not run, I got
+a variety of segfaults. I will resent the mail, there were some error codes,
+maybe somebody can make use of that. The fun thing, every time I started
+heroes, I got a different error message...
+
+----------
+
+From: "Christian T. Steigies" <cts@debian.org>
+Date: Thu, 31 Aug 2000 12:11:20 +0200
+Version: 0.6pre3
+
+On Wed, Aug 30, 2000 at 06:10:11PM +0200, Alexandre Duret-Lutz wrote:
+
+> Yes please.  Also, have you configured with --enable-debug?
+> This would allow:
+I had not, I did not (oups, no coredump, guess I switched that off).
+
+The old error messages:
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+Failed to open visual:
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+
+Xlib: unexpected async reply (sequence 0x48)!
+X connection to :0.0 broken (explicit kill or server shutdown).
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  38 (X_QueryPointer)
+  Resource id in failed request:  0x240000c
+  Serial number of failed request:  73
+  Current serial number in output stream:  76
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+Failed to open visual:
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+X Error of failed request:  BadShmSeg (invalid shared segment parameter)
+  Major opcode of failed request:  129 (MIT-SHM)
+  Minor opcode of failed request:  3 (X_ShmPutImage)
+  Segment id in failed request:  0x240000e
+  Serial number of failed request:  20
+  Current serial number in output stream:  23
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+X Error of failed request:  BadShmSeg (invalid shared segment parameter)
+  Major opcode of failed request:  129 (MIT-SHM)
+  Minor opcode of failed request:  3 (X_ShmPutImage)
+  Segment id in failed request:  0x240000e
+  Serial number of failed request:  20
+  Current serial number in output stream:  23
+
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+Fatal signal: Segmentation Fault (SDL Parachute Deployed)
+Xlib: unexpected async reply (sequence 0x44)!
+X connection to :0.0 broken (explicit kill or server shutdown).
+
+The new messages with HEROES_DEBUG
+heroes: set debug level to fffffbff
+heroes: initialization
+heroes: looking for HEROES_DATA_DIR or HEROES_DATADIR...
+heroes: ... not found.
+heroes: set resource $(data-dir)=/usr/share/games/heroes
+heroes: get resource $(heroesrc-txt)=$(data-dir)/etc/heroesrc
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(heroesrc-txt)=/usr/share/games/heroes/etc/heroesrc
+heroes: reading configuration file: /usr/share/games/heroes/etc/heroesrc ...
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: reading sound config file: /usr/share/games/heroes/mod/sound.conf ...
+heroes: ... could not open.
+heroes: reading sound config file: /sound.conf ...
+heroes: ... could not open.
+heroes: ... finished reading /usr/share/games/heroes/etc/heroesrc.
+heroes: user directory setup
+heroes: directory /home/cts/.heroes/ already exists
+heroes: setup default extra directory
+heroes: get resource $(extra-levels-dir)=$(data-dir)/extralvl/
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(extra-levels-dir)=/usr/share/games/heroes/extralvl/
+heroes: reading configuration file: /home/cts/.heroes/heroesrc ...
+heroes: ... could not open.
+heroes: parsing command line
+heroes: get resource $(text-conf-txt)=$(data-dir)/txt_cfg/txti.cfg
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(text-conf-txt)=/usr/share/games/heroes/txt_cfg/txti.cfg
+heroes: parsing text configuration file: /usr/share/games/heroes/txt_cfg/txti.cfg ...
+heroes: ... done.
+heroes: randomize
+heroes: get resource $(levels-list-txt)=$(data-dir)/levels/level.lst
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(levels-list-txt)=/usr/share/games/heroes/levels/level.lst
+heroes: read level list: /usr/share/games/heroes/levels/level.lst ...
+heroes: ... done
+heroes: browsing directory /home/cts/.heroes/levels ...
+heroes: ... 0 files
+heroes: browsing directory /usr/share/games/heroes/extralvl/ ...
+extradir: /usr/share/games/heroes/extralvl/: No such file or directory
+heroes: reading option from /home/cts/.heroes/options.dat
+heroes: cannot open /home/cts/.heroes/options.dat
+heroes: reading scores from /home/cts/.heroes/scores.dat
+heroes: cannot open /home/cts/.heroes/scores.dat
+heroes: reading saved games from /home/cts/.heroes/savegame.dat
+heroes: cannot open /home/cts/.heroes/savegame.dat
+heroes: get resource $(sfx-dir)=$(data-dir)/sfx/
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(sfx-dir)=/usr/share/games/heroes/sfx/
+heroes: get resource $(sfx-conf-txt)=$(data-dir)/sfx/sfx.conf
+heroes: get resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(data-dir)=/usr/share/games/heroes
+heroes: expanded resource $(sfx-conf-txt)=/usr/share/games/heroes/sfx/sfx.conf
+heroes: reading sound effects config: /usr/share/games/heroes/sfx/sfx.conf
+Cannot open /usr/share/games/heroes/sfx/sfx.conf, disabling sound-effects
+(run with -X to supress this message).
+heroes: initialize SDL
+heroes: initialize joystick
+heroes: opening audio at 22050 Hz 16 bit stereo, 1024 bytes audio buffer
+
+heroes: opened audio at 22050 Hz 16 bit stereo, 1024 bytes audio buffer
+
+heroes: set volume to 68/128
+
+heroes: set video mode
+
+----------
+
+From: "Christian T. Steigies" <cts@debian.org>
+Date: Thu, 31 Aug 2000 15:28:52 +0200
+Version: 0.6pre3
+
+>  - what version of SDL are you using?
+Hmm, a mixture of 1.1.2 and 1.0.[1 or 8] I think. I am not exactly sure
+which is used for the package, will check again, was late last night...
+
+>  - is a window mapped before the crash or not?
+window mapped? If you mean opened, yes a small window is opened, like with
+i386, drawn with a black background, maybe a little white.
+>  - how is configured you X server (resolution, depth)?
+m68k uses xserver-fbdev, with my grafics board it is not yet possible to
+change the resolution. so now its using 1024x768 in 8 bit. But also when I
+run heroes via ssh from my i386 machine (32bit) it crashes (did no ttest
+last night though).
+
+>  - can you cite me a couple of games that work well with SDL
+>    on m68k so I can look their sources for differences?
+Sure. I would think all the SDL games I maintain are working on m68k.
+Actually I did not test them all, but I am pretty sure at least gemdropx
+works, see here for the links:
+http://master.debian.org/~cts/packages.html
+
+----------
+
+From: "Christian T. Steigies" <cts@nikocity.de>
+Date: Thu, 21 Sep 2000 00:32:22 +0200
+Version: 0.6pre3
+
+> Please try to configure Heroes with --enable-debug,
+> --disable-joystick and --disable-sound and ensure
+> to have coredump turned on (bash: ulimit -c unlimited
+> tcsh: unlimit coredumpsize).
+Ok, good news. Tried that, its very slow, but it seems to work much better.
+I remember seeing on the list the -S option, when I use that (with the
+non-debug version) heroes runs much better. Actually it runs very good, so
+its only a sound problem. It runs so good, the gameplay is much too fast, I
+thought it would be much too slow... maybe there is a problem with
+calculating game/machine speed? Do you use bogomips for that? My Amiga has
+around 100 Bogomips, but the speed compares to a 486/100, maybe Pentium90,
+with a clock frequency of 50MHz.
+So there is another problem, but not as bad, as I first thought.
+
+----------
+
+From: "Christian T. Steigies" <cts@debian.org>
+Date: Thu, 21 Sep 2000 13:28:16 +0200
+Version: 0.6pre3
+
+On Thu, Sep 21, 2000 at 11:20:49AM +0200, Alexandre Duret-Lutz wrote:
+
+> Great, thanks for tracking this down.  Other things you can try
+> is to run the game with sound but without sound effects (-X); or
+> to link with libMikMod instead of SDL_mixer.  This may help to
+> narrow the bug.
+Can try that.
+>  cts> It runs so good, the gameplay is
+>  cts> much too fast, I thought it would be much too
+>  cts> slow... maybe there is a problem with calculating
+>  cts> game/machine speed?
+>
+> By "too fast", do you mean "so fast that the camera is
+> not quick enough to follow the vehicles"?  This was
+The vehicles are running much too fast, the camera could follow (most of the
+time) which I find very astonishing for such an old machine.
+> a bug reported by Mattias Engdegård (on Solaris), and have
+> been fixed between the 0.6-pre3 and 0.6 versions.  Are you
+> still using 0.6-pre3?
+Yup... will change that.
+
+----------
+
+From: "Christian T. Steigies" <cts@debian.org>
+Date: Fri, 22 Sep 2000 19:16:30 +0200
+Version: 0.6
+
+On Thu, Sep 21, 2000 at 11:20:49AM +0200, Alexandre Duret-Lutz wrote:
+>
+> Great, thanks for tracking this down.  Other things you can try
+> is to run the game with sound but without sound effects (-X); or
+> to link with libMikMod instead of SDL_mixer.  This may help to
+> narrow the bug.
+Didnt work, but I did not spend much time on it. I think the debian
+maintainer should update the package to support other arches as well, maybe I
+did something wrong while building the package. I couldn't build a complete
+package, since on m68k I can only build for sdl, not for ggi. Thats one
+thing I was not able to get into the debian files, but thats Daniel's jobs,
+isn't it? ;-)
+
+> By "too fast", do you mean "so fast that the camera is
+> not quick enough to follow the vehicles"?  This was
+> a bug reported by Mattias Engdegård (on Solaris), and have
+> been fixed between the 0.6-pre3 and 0.6 versions.  Are you
+> still using 0.6-pre3?
+With 0.6 I get the right speed. So its working pretty well (besides the
+sound problem) on m68k. Maybe a note in the readme (Daniel: its working for
+me on m68k only with -S) but otherwise its fine for non-i386 I think.
+
+======================================================================
+
+From: Stéphane Denis <S.Denis@darkworks.com>
+Date: Fri, 22 Sep 2000 10:38:46 +0200
+Version: 0.6a
+
+Heroes configuration
+-------------------
+Heroes version           : 0.6a
+host                     : i586-pc-beos
+display & keyboard       : SDL 1.1.5
+joystick                 : SDL 1.1.5
+sound                    : <disabled>
+compiler                 : gcc
+compiler flags           : -I/boot/develop/tools/gnupro/include -I/boot/develop/tools/gnupro/include/SDL  -DNDEBUG -ffast-math -fstrict-aliasing -fomit-frame-pointer -O3
+linker flags             : -s -L/boot/develop/tools/gnupro/lib -lSDL
+binary install path      : /usr/local/bin
+data install path        : /usr/local/share/heroes
+manual page install path : /usr/local/man
+info manual install path : /usr/local/info
+html doc install path    : <none>
+
+$ make install
+Making install in lib
+[...]
+make[1]: Leaving directory `/boot/realtech/Heroes/lib'
+Making install in src
+make[1]: Entering directory `/boot/realtech/Heroes/src'
+Making install in etc
+make[2]: Entering directory `/boot/realtech/Heroes/src/etc'
+make[3]: Entering directory `/boot/realtech/Heroes/src/etc'
+make[3]: Nothing to be done for `install-exec-am'.
+/bin/sh ../../mkinstalldirs /usr/local/share/heroes/etc/
+ /bin/install -c -m 644 heroesrc /usr/local/share/heroes/etc//heroesrc
+/bin/install: cannot create regular file
+`/usr/local/share/heroes/etc//heroesrc': Invalid argument
+make[3]: *** [install-xDATA] Error 1
+make[3]: Leaving directory `/boot/realtech/Heroes/src/etc'
+make[2]: *** [install-am] Error 2
+make[2]: Leaving directory `/boot/realtech/Heroes/src/etc'
+make[1]: *** [install-recursive] Error 1
+make[1]: Leaving directory `/boot/realtech/Heroes/src'
+make: *** [install-recursive] Error 1
+
+======================================================================
+
+From: raven <mfilep@fbi.hu>
+Date: 05 Dec 2000
+Version: 0.6
+
+hello I've compiled heroes recently on my linux system.  everything
+runs fine, but I do have a problem with the controls. I mean, that the
+reaction of the vehicle is too slow (it turns too slow) .  This
+shouldn't depend on my machine configuration (350 mhz k6-2 128 MB
+RAM).
+
+----------
+
+From: mat <mfilep@fbi.hu>
+Date: Wed, 06 Dec 2000 09:52:27 +0100
+Version: 0.6
+
+I've compiled it with SDL. I have a SUSE linux 6.4 distribution (with
+a "few" changes (ie: newer ver. of make a few newer and updated
+libs...))
+
+by too slow I mean that the vehicle doesn't turn at that moment when I
+press the key. This delay is not long enough to be mesureable, but it
+disturbs, so that the gameplay isn't fluent enough...
+
+----------
+
+From: Alexandre Duret-Lutz <duret_g@lrde.epita.fr>
+Date: 21 Feb 2001 20:16:23 +0100
+Version: 0.8
+
+Just a notice to say I have seen what you describe on a laptop
+running FreeBSD, a couple of week ago.  And no, that's not
+the *standard* behaviour as I answered you :).
+
+Still I have no idea what the reason is.  (For the records that
+was an Heroes 0.8, compiled against SDL too; I don't even know
+if GGI works on FreeBSD.)

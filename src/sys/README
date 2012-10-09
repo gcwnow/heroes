@@ -1,0 +1,11 @@
+This directory is much like ../media in the sense that it contains
+drivers for various third party libraries, but is system-oriented
+rather than media-oriented (e.g. if support for different kind of thread
+libraries was needed, this would belong to this directory).
+
+Make sure you read the comments in ../media/README, because this
+directory is organized similary.
+
+The ony group of system-facility handled here for now is
+
+ - M : main  (some libraries need special `main()' arrangements)

@@ -1,0 +1,19 @@
+These files are miscellaneous tools used by the configure, build,
+install, or/and release processes.  Most of them are used from the
+Makefiles (maybe only if ./configure decided so), but a few of them
+are meant to be run manually.  The list below attempts to give a short
+summary for each of the file that doesn't come along with autoconf or
+automake.
+
+alpha.sh        make an alpha release (distcheck, upload, web-update, announce)
+autogen.sh      create all autoconf/automake generated files
+cvsboot.sh      bootstrap a fresh CVS checkout
+exnews.pl       get latest entry from any ChangeLog-like file (used with NEWS)
+fetish-sync.sh  update all files shared with (=stolen from) fetish
+genm4mam.sh     create m4/Makefile.inc
+genpotfile.sh   create po/POTFILES.in
+readme.sed      used to extract the top-level README from the Texinfo manual
+upgettext.sh    install gettext's files and patch them
+
+The file `HACKING', at the top-level directory of the distribution,
+might give some instructions regarding the usage of these files.

@@ -1,0 +1,27 @@
+Warning: the gettext maintainer says this patch is WRONG.  I should
+         remove it as soon as I figure how it can be worked-around
+         properly (using localdef).
+
+--- intl/ChangeLog
++++ intl/ChangeLog
+@@ -1,1 +1,9 @@
++2001-04-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
++
++	* dcigettext.c (HAVE_LOCALE_NULL): Don't define even if
++	__GNU_LIBRARY__	is defined.  Otherwise guess_category_value()
++	uses glibc's setlocale() which make the libintl dependant
++	on the glibc configuration and prevent testing the package with
++	foreign languages.
++
+
+--- intl/dcigettext.c.old	Tue Apr 24 19:49:54 2001
++++ intl/dcigettext.c	Tue Apr 24 19:50:26 2001
+@@ -203,7 +203,7 @@
+    However it does not specify the exact format.  Neither do SUSV2 and
+    ISO C 99.  So we can use this feature only on selected systems (e.g.
+    those using GNU C Library).  */
+-#if defined _LIBC || (defined __GNU_LIBRARY__ && __GNU_LIBRARY__ >= 2)
++#if defined _LIBC
+ # define HAVE_LOCALE_NULL
+ #endif
+ 

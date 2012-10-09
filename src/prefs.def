@@ -1,0 +1,230 @@
+autogen definitions prefs;
+/*------------------------------------------------------------------------.
+| Copyright 2001  Alexandre Duret-Lutz <duret_g@epita.fr>                 |
+|                                                                         |
+| This file is part of Heroes.                                            |
+|                                                                         |
+| Heroes is free software; you can redistribute it and/or modify it under |
+| the terms of the GNU General Public License as published by the Free    |
+| Software Foundation; either version 2 of the License, or (at your       |
+| option) any later version.                                              |
+|                                                                         |
+| Heroes is distributed in the hope that it will be useful, but WITHOUT   |
+| ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or   |
+| FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License   |
+| for more details.                                                       |
+|                                                                         |
+| You should have received a copy of the GNU General Public License along |
+| with this program; if not, write to the Free Software Foundation, Inc., |
+| 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                   |
+`------------------------------------------------------------------------*/
+
+/*
+** This file describes the preference settings of Heroes.  It is used
+** to generate the preferences saving and loading code.
+**
+** Externally, the preferences are saved as text lines of the form:
+**   name: value
+** and can be arranged into groups (and subgroups, to any depth):
+**  heroes.screen.gamma: 10
+**
+** Internally, the preferences are stored in a flat structure
+** called opt.  So for the user preferences seems to be organized as
+** a tree but it's not actually the case in the code.
+**
+** Group attributes:
+** -----------------
+**  name:     name of the group
+**  verbatim: any verbatim declaration
+**
+** Pref attributes:
+** ----------------
+**  name:    name of the preference
+**  attrib:  name of the corresponding attribute in the struct
+**  array:   size of the array, if this is an array
+**  nodec:   don't declare the attribute in the struct (because
+**           it has been declared with `verbatim', for instance)
+**  type:    the C type for the attribute (types `bool', `a_u8',
+**           `a_u16', `a_u32', are recognized for max and min)
+**  default: default value(s) for attrib
+**  max:     maximum value for attribute (the default depends on `type')
+**  min:     minimum value for attribute (the default depends on `type')
+**  doc:     documentation for this preference
+*/
+
+group = {
+	name = heroes;
+
+	group = {
+		name = screen;
+
+		pref = {
+			name = display_radar;
+			attrib = radar_map;
+			type = bool;
+			default = true;
+			doc = "Whether the radar must be drawn.";
+		};
+		pref = {
+			name = display_infos;
+			attrib = display_infos;
+			type = bool;
+			default = true;
+			doc = "Whether game counters must be drawn.";
+		};
+		pref = {
+			name = gamma;
+			attrib = luminance; /* FIXME: rename to gamma.  */
+			type = a_u8;
+			max = 12;
+			default = 6;
+			doc = "Gamma setting.";
+		};
+		pref = {
+			name = inertia;
+			attrib = inertia;
+			type = bool;
+			default = true;
+			doc = "Whether the camera moves with inertia.";
+		};
+	}; /* screen */
+
+	group = {
+		name = sound;
+
+		pref = {
+			name = music_enable;
+			attrib = music;
+			type = bool;
+			default = true;
+			doc = "Whether music is enabled.";
+		};
+		pref = {
+			name = music_volume;
+			attrib = music_volume;
+			type = a_u8;
+			max = 12;
+			default = 6;
+			doc = "Music volume.";
+		};
+		pref = {
+			name = sfx_enable;
+			attrib = sfx;
+			type = bool;
+			default = true;
+			doc = "Whether sound effects are enabled.";
+		};
+		pref = {
+			name = sfx_volume;
+			attrib = sfx_volume;
+			type = a_u8;
+			max = 12;
+			default = 6;
+			doc = "Sound effects volume.";
+		};
+	}; /* sound */
+
+	group = {
+		name = control;
+
+		pref = {
+			name = player1;
+			attrib = ctrl_one;
+			type = a_u8;
+			default = 0;
+			max = 1;
+			doc = "Control type for player one (0=key, 1=joy).";
+		};
+		pref = {
+			name = autopilot1;
+			attrib = autopilot_one;
+			type = bool;
+			default = true;
+			doc = "Whether player one wants autopilot.";
+		};
+		pref = {
+			name = player2;
+			attrib = ctrl_two;
+			type = a_u8;
+			default = 0;
+			max = 1;
+			doc = "Control type for player two (0=key, 1=joy).";
+		};
+		pref = {
+			name = autopilot2;
+			attrib = autopilot_two;
+			type = bool;
+			default = true;
+			doc = "Whether player two wants autopilot.";
+		};
+	}; /* control */
+
+	group = {
+		name = game;
+
+		pref = {
+			name = speed;
+			attrib = speed;
+			type = a_u8;
+			default = 0;
+			max = 2;
+			doc = "Speed of the game.";
+		};
+		pref = {
+			name = gamerounds;
+			attrib = gamerounds;
+			type = a_u8;
+			default = 4;
+			max = 15;
+			doc = "Index of the number of rounds (not the number"
+			      " itself).";
+		};
+		pref = {
+			name = player_colors;
+			attrib = "player_color";
+			array = 4;
+			type = a_u8;
+			default = 0, 1, 2, 3;
+			max = 4;
+			doc = "Color for players.";
+		};
+	}; /* game */
+
+	group = {
+		name = extras;
+
+		pref = {
+			name = mode;
+			attrib = extras;
+			type = a_u8;
+			default = 0;
+			max = 2;
+			doc = "How extras levels are included.";
+		};
+	}; /* extras */
+
+	group = {
+		name = 'keys_pref_group ()';
+		nameraw;
+		verbatim = "a_keycode            player_keys[2][6];";
+		pref = {
+			name = player1_keys;
+			attrib = "player_keys[0]";
+			array = 6;
+			nodec;
+			type = a_keycode;
+			default = HK_Up, HK_Left, HK_Down, HK_Right,
+			          HK_CtrlR, HK_ShiftR;
+			doc = "Keycodes for player one.";
+		};
+		pref = {
+			name = player2_keys;
+			attrib = "player_keys[1]";
+			array = 6;
+			nodec;
+			type = a_keycode;
+			default = HK_E, HK_S, HK_D, HK_F, HK_CtrlL, HK_ShiftL;
+			doc = "Keycodes for player two.";
+		};
+	}; /* ggi | sdl */
+}; /* heroes */

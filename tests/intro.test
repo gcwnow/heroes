@@ -1,0 +1,4 @@
+#!/bin/sh
+# Test to make sure that the intro does not segfault.
+. $srcdir/defs || exit 1
+$HEROES --check=intro

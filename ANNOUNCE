@@ -1,0 +1,30 @@
+I am pleased to announce the release of Heroes 0.21
+
+Heroes is similar to the "Tron" and "Nibbles" games of yore, but
+includes many graphical improvements and new game features.
+In it, you must maneuver a small vehicle around a world and collect
+powerups while avoiding obstacles, your opponents' trails, and even
+your own trail.
+
+There are five game modes available.  Quest is the classical
+Nibbles, in Death Match you start with very long tails a must kill your
+opponents, in Kill'em All you must run over lemmings moving on the
+ground, in Time Cash or Color modes you must collect money or pyramids
+of color.  Heroes features 12 original sound tracks, 94 levels (in 10
+different tile sets) plus a level editor.
+
+You are invited to visit the following links:
+  home page:    http://heroes.sourceforge.net/
+  screenshots:  http://heroes.sourceforge.net/screenshots.html
+  download:     http://heroes.sourceforge.net/download.html
+
+This is a bug fix release.  See NEWS for details.
+
+This version requires at least Heroes-data-1.4.
+
+HELP!  Heroes development is open to anyone and we welcome any
+contribution.  In the hypothetical case you would like to spend some
+time on the source code and don't know what to do, please, ask the
+mailing list: there is presently some (non-boring) tasks that needs to
+be done and for which understanding the full source tree is not a
+prerequisite.

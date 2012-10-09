@@ -1,0 +1,17 @@
+@echo off
+rem ## If Heroes cannot find its files, you may use a line
+rem ## like the following to tell it where they are.
+rem ## This should be the path to the directory containing the bin\ and
+rem ## datadir\ directories.
+rem set HEROES_PREFIX=C:\heroes
+rem ## Uncomment the following line to change the language to French.
+rem ## Other available languages are Dutch (nl_NL), German (de_DE), and
+rem ## Italian (it_IT).
+rem set LANG=fr_FR
+rem ## The following line launch Heroes, with 8bit and 11kHz sound output,
+rem ## this are safe values but very low qualit and you may want to
+rem ## suppress these options to try the default configuration instead
+rem ## (16bits, 22mHz), or higher values.
+rem ## Also, you may want to add some other options (such as -F for
+rem ## fullscreen), see the manual for details.
+bin\heroes.exe -8 -d freq=11050

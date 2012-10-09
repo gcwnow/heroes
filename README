@@ -1,0 +1,400 @@
+  .---------------------------------------------------------------------.
+  | The following information has been extracted automatically from the |
+  | Texinfo documentation to help you install Heroes.  You should read  |
+  | the full manual for more complete documentation.                    |
+  `---------------------------------------------------------------------'
+
+Summary
+*******
+
+  * Overview of Heroes
+    - License
+    - Getting Heroes
+    - Reporting bugs, sending suggestions or contributions
+
+  * Installation of Heroes
+    - Needed Libraries
+    - configure generic instructions
+    - configure options for Heroes
+    - Building a relocatable package
+    - Machines
+
+Overview of Heroes
+******************
+
+   Heroes is similar to the "Tron" and "Nibbles" games of yore, but
+includes many graphical improvements and new game features.
+
+   In it, you must maneuver a small vehicle around a world and collect
+powerups while avoiding obstacles, your opponents' trails, and even
+your own trail.
+
+   There are five game modes available.  Quest is the classical
+Nibbles, in Death Match you start with very long tails a must kill your
+opponents, in Kill'em All you must run over lemmings moving on the
+ground, in Time Cash or Color modes you must collect money or pyramids
+of color.  Heroes features 12 original sound tracks, 94 levels (in 10
+different tile sets) plus a level editor.
+
+   Heroes source code originates from an original MS-DOS game but has
+been heavily modified to enhance the portability and some new features
+have been added.  MS-DOS support has been lost by the meantime.  The
+original MS-DOS version can still be found on the Internet but is
+unmaintained and should be considered obsolete.
+
+   The current development focus on cleaning the code and port the game
+to available operating systems.  Our objective is to release the version
+1.0 as a clean and portable base that would allow further important
+works such as network support or programmable vehicles.
+
+License
+=======
+
+   The full game (that is: source code, pictures, sound-tracks, and levels)
+is distributed under the terms of the GNU General Public License version 2.
+See the file COPYING for details.
+
+Getting Heroes
+==============
+
+Where to fetch new releases?
+----------------------------
+
+   Heroes development is powered by the free services offered by
+SourceForge to the Open-Source community.  The web page of Heroes is
+`http://heroes.sourceforge.net/'.
+
+   The latest releases of Heroes is always uploaded to SourceForge and
+available from `http://sourceforge.net/projects/heroes/'.  Announces
+are sent to the `heroes-announce' mailing list (*note Mailing lists::).
+
+   Source code releases are also uploaded to Ibiblio (formerly MetaLab,
+and Sunsite)) in `/pub/linux/games'; see the Ibiblio mirror list
+(http://ibiblio.org/pub/linux/MIRRORS.html) to find your nearest
+mirror.  You will have to wait three or four days to have the files
+available on Ibiblio after a release.
+
+   A public CVS server is also accessible.  See
+`http://sourceforge.net/cvs/?group_id=7982' for details.
+
+What to download?
+-----------------
+
+   Heroes is distributed as five packages with independent version
+numbering and release schedule.
+
+`heroes'
+     The source code, info file, and man page.
+
+`heroes-data'
+     The level data (level maps, sprites, etc.)
+
+`heroes-sound-tracks'
+     Sound tracks for the game (.xm files).
+
+`heroes-sound-effects'
+     The sound effects for the game (.wav files).
+
+`heroes-hq-sound-tracks'
+     High quality sound tracks (.xm files), they will replace some
+     sound-tracks from `heroes-sound-track'.
+
+   The two first packages are required, the others are optional.
+
+   The game has been so split because the data and sound files are big
+and don't evolve as often as the code does.  It would therefore be
+unfair to bloat the bandwidth by requiring the mirrors and users to
+download everything on each release.
+
+Reporting bugs, sending suggestions or contributions
+====================================================
+
+   We welcome bug reports or suggestions for Heroes (both program or
+documentation).  Please email them to <heroes-bugs@lists.sourceforge.net>
+or <heroes-discuss@lists.sourceforge.net>.  Please, see the Texinfo
+documentation of Heroes for guidelines regarding bug reporting.
+
+Installation of Heroes
+**********************
+
+Needed Libraries
+================
+
+   Heroes can be configured to use several libraries to handle display,
+sound output and joystick support.  Following is a list of supported
+libraries (hopefully you won't have to install all of them but just a
+subset).
+
+   * LibGGI (General Graphic Interface) can be used as a display and
+     keyboard driver. Get it from `http://www.ggi-project.org/'.
+
+   * LibGII (General Input Interface) will provide joystick support
+     (the game can be compiled without).  Get it from
+     `http://www.ggi-project.org/'.  It is needed by LibGGI, by the way.
+
+   * SDL can be used as a display and keyboard driver.  Recent
+     revisions will also provide support for joysticks.  Get it from
+     `http://www.libsdl.org/'.
+
+   * Allegro, a game programming library, can be used as a display,
+     keyboard, and joystick driver.  `http://alleg.sourceforge.net/'.
+
+   * LibMikMod is a sound library. You don't need it if you want to
+     compile Heroes without sound support.  Get it from
+     `http://www.mikmod.org/' or from
+     `ftp://ftp.ibiblio.org/pub/linux/apps/sound/libs/'.  If you
+     install LibMikMod from sources you may want to compile LibMikMod
+     without Alsa support (*note Troubleshooting::).
+
+   * SDL_Mixer is an alternative sound engine that can be used only if
+     you use SDL as display driver. You don't need it if you want to
+     compile Heroes without sound support.  Get it from
+     `http://www.devolution.com/~slouken/SDL/projects/SDL_mixer/'.
+
+
+   To summarize, install at least LibGGI, SDL, or Allegro to get video
+output and keyboard handling.  Install LibGII to get joystick support,
+unless you use a recent SDL or Allegro.  And install LibMikMod (or
+SDL_mixer if you have SDL) if you want sound output.
+
+   My personal preference goes to LibGGI/LibGII and LibMikMod which give
+you more control over the drivers used.  On the other hand, SDL seems
+better at doing full screen display and is maintained actively.  Allegro
+is quite new on Unix.
+
+   Heroes also supports memory debugging libraries, such as `dmalloc' or
+`efence'.  See the `--enable-mem-debug' option in section *Note
+configure options::.
+
+configure generic instructions
+==============================
+
+   Read the file INSTALL if you are not familiar with configure scripts.
+
+configure options for Heroes
+============================
+
+   `configure' will do its best to find the libraries and functions
+needed by the game.  Still, you may give several options to `configure'
+to help it, or to fine tune special features of Heroes.
+
+`--enable-html-doc[=DIR]'
+     Build and install html documentation in directory `DIR'.  If `DIR'
+     is not given, install in `$datadir/heroes/doc'.
+
+`--disable-sound'
+     Turn off sound support. Sound is enabled by default, unless no
+     sound engine is found).
+
+`--disable-joystick'
+     Do not include joystick support in the game.  Joystick support is
+     enabled by default, unless you don't have GII or joystick support
+     in SDL.
+
+`--with-sdl[=DIR]'
+     Specify that you want to link with SDL.  This is the default if
+     LibGGI is not installed.  If you installed SDL in some
+     non-standard place, you can specify the installation path as an
+     argument.  For example:
+          ./configure --with-sdl=/home/adl/usr
+     `configure' will then look for `/home/adl/usr/bin/sdl-config' and
+     configure Heroes accordingly.
+
+`--with-ggi[=DIR]'
+     Link with LibGGI.  This is the default if LibGGI is installed.  If
+     you installed LibGGI in some non-standard place, you can specify
+     the installation path as an argument
+
+`--with-allegro[=DIR]'
+     Link with Allegro.  This is the default is neither LibGGI not SDL
+     can be used.  If you installed Allegro in some non-standard place,
+     you can specify the installation path as an argument
+
+`--with-mikmod[=DIR]'
+     Use LibMikMod four sound output.  This is the default if LibMikMod
+     is installed and LibGGI have been selected.  You may specify where
+     LibMikMod is installed using the optional argument.
+
+`--with-sdl-mixer[=DIR]'
+     Use SDL_mixer for sound output.  This is the default if SDL_mixer
+     is installed and SDL has been selected.  You may specify where
+     SDL_mixer is installed using the optional argument.  Using this
+     option implies `--with-sdl'.
+
+`--disable-heroes-debug'
+     Turn off tracing support.  See the description of the
+     `HEROES_DEBUG' variable (*note Environment::).  This is enabled by
+     default to facilitate bug reporting.  Using this options should
+     reduce the size of the resulting binary, and speed up the game by
+     an indiscernible amount.
+
+   The following options are for developing purpose.  The default
+configuration should be suitable for end users (i.e. players) but people
+attempting to hack the code may want debugging symbols or compiler
+warnings.
+
+`--enable-debug'
+`--disable-debug'
+     This is a three state option.  The default is to compile with
+     debugging symbols: this produce bigger binaries but allow to get
+     helpfull coredumps, without slowing down the game.  You may want
+     to use `--enable-debug' to include more debugging data and turn on
+     some debugging code.  Use `--disable-debug' to turn this off.
+     Translators: you _do want_ to turn this option on, really!  Because
+     the debugging code includes some checks on the translated messages.
+
+`--disable-optimizations'
+     Turn off compiler optimizations options.  This can ease debugging.
+     If you want to supply your own optimizations options, use
+     something like `--enable-optimizations='-O3 -march=pentium''.
+
+`--enable-warnings'
+     Try to turn on a large bunch of compiler warnings.
+
+`--enable-assert'
+     Turn on some assertions squattered over the source code.  This can
+     slow down things a bit.
+
+`--enable-devel'
+     Is a shorthand for `--enable-debug --disable-optimizations
+     --enable-warnings --enable-assert'.
+
+`--with-mpatrol'
+     Link with MPatrol, a `malloc()' debugger.
+
+`--with-mtrace'
+     Use GNU libc's `mtrace()' facility to check `malloc()' usage.
+
+`--with-dmalloc'
+     Link with Dmalloc, a `malloc()' debugger.
+
+`--with-efence'
+     Link with Electric Fence, a `malloc()' debugger.
+
+`--enable-mem-debug'
+     Check for `mtrace()', Dmalloc, or Electric Fence.  Use the first
+     found.
+
+`--enable-gprof'
+     Enable profiling support with `gcc', you need `gprof' to inspect
+     the file resulting from a run of Heroes.
+
+`--disable-display'
+     This disable all screen output, making the game rather unplayable.
+     This suppress decencies over third party libraries like GGI or SDL,
+     therefore you may find it useful with some debugging tools like
+     checkergcc.
+
+Building a relocatable package
+==============================
+
+   "Relocation" refers to the ability to install or move the game in a
+directory which is different from the one it has been configured for.
+This usually happens if you create a binary package for Heroes and
+don't know in advance where the user will unpack it.  This section
+describe how Heroes find for his files, in order to allow relocatable
+packages.  Most people don't need to read this section, only packagers
+might be interested.
+
+   The values of the `./configure' options you used to specify
+directories (such as `--prefix', `--bindir', or `--datadir') are all
+transformed into paths relative to PREFIX and then hardcoded into the
+Heroes binary.  Because Heroes uses only paths relative to PREFIX, the
+relocation process is just a matter of guessing the correct value of
+PREFIX at runtime.  This guess is done using various informations
+available: first the original value of PREFIX is tried, then PREFIX is
+computed from the path to the current binary (`argv[0]') when
+available, then the content of the environment variable `PATH' is used
+to find the binary and derive PREFIX, finally Heroes assumes it is
+running from the BINDIR directory.  The whole process is not garanteed
+to succeed, but you can also override those paths with some enivronment
+variables (*note Environment::).
+
+Machines
+========
+
+   Heroes has been reported to compile and run on the following
+architectures.  Since Heroes can use SDL, GGI, or Allegro as display
+driver, the following list shows the driver which was used.
+
+Linux/i386 (GGI, SDL, or Allegro)
+     Should build out of the box.  Packages for some Linux distributions
+     are available from the web pages.
+
+     Suse 7.1 users, the libc shipped with your distribution
+     (glibc-2.2-7) will crash every time Heroes calls the `ngettext()'
+     function.  The workaround is to configure Heroes with `configure
+     --with-included-gettext' so that it uses its own version of
+     `ngettext()'.
+
+     Red Hat 7.0 users, the compiler shipped with your distribution
+     (packaged as `gcc-2.96-54.i386.rpm') is an experimental version
+     which is still _bugged_ despite the pile of fixes applied.  It
+     actually produces unfaithful code for Heroes, so please use
+     another compiler.  Either upgrade to a newer version
+     (`gcc-2.96-64.i386.rpm' is known to work) or use the one provided
+     by the `kgcc' package.
+
+Linux/m68k (SDL)
+     Is reported to work when the sound (`SDL_mixer') is disabled
+     (`configure --disable-sound' or `heroes -S').  Any feedback on
+     this issue is welcome.  See also the `BUGS' file.
+
+FreeBSD (SDL)
+     Should build out of the box.  Packages are available from the web
+     pages.
+
+Solaris (SDL)
+     Should build out of the box.
+
+Win32/MinGW32 (SDL)
+     Can be cross-compiled (native compilation untested).  The script
+     used to cross build the Heroes package available on the web page
+     is in the subdirectory `arch/mingw32'.
+
+Win32/VisualC (SDL)
+     See the files in the `arch/VisualC' subdirectory of the Heroes CVS
+     tree.  We used to distribute these files along with the rest of the
+     sources, but stopped because they are now completely out-of-date
+     (they have not been updated since version 0.7).  However you can
+     use them as a start point if you think about compiling Heroes with
+     MSVC.
+
+Digital Unix (GGI)
+     Should build out of the box.
+
+NetBSD (SDL)
+     I had to tweak SDL 1.1.6 to get it working, and also force Heroes'
+     configure to use the result of `sdl-config --static-libs' instead
+     of `sdl-config --libs'.  Both issues should be fixed today (FIXME:
+     need to check).
+
+OpenBSD 2.9 (GGI & SDL)
+     It looks like some configure hints need to be given when using
+     either libs.
+
+     A build of Heroes configured with GGI will apperently complete
+     successfully, however the resulting binary fails to load, with the
+     dynamic loader complaining about a missing symbol from libpthread.
+     So you'd rather configure Heroes with
+          ./configure --with-ggi=/usr/local LDFLAGS=-pthread
+     Then Heroes appears to work fine.
+
+     If you prefer to use SDL, things are different. I had to configure
+     Heroes with
+          ./configure --with-sdl=/usr/local LDFLAGS=-L/usr/X11R6/lib X11BASE=/usr/X11R6
+     Unfortunately, the resulting binary froze when initializing SDL (in
+     `SDL_init()').  Please send us a note if you are luckier.  FIXME:
+     Look how other packages using SDL are built, I'm probably missing
+     something.
+
+IRIX 6.5 (SDL)
+     Heroes 0.7 has been reported to compile and run with SDL 1.1.3 and
+     `gcc' + libraries from `freeware.sgi.com' on IRIX 6.5.
+
+BeOS (SDL)
+     Heroes 0.9 has been reported to compile and run out of the box.
+
+   If you got Heroes working on a platform which is not listed here,
+please send a notice to <heroes-discuss@lists.sourceforge.net>.
+

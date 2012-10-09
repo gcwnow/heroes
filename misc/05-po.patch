@@ -1,0 +1,15 @@
+We don't use po/ChangeLog.  All changes to po/*.po should go into
+to main ChangeLog, and having a file po/ChangeLog would make emacs
+default to the latter which is really annoying.
+
+--- po/Makefile.in.in	Wed Apr 25 21:11:13 2001
++++ po/Makefile.in.in	Wed Apr 25 21:11:25 2001
+@@ -45,7 +45,7 @@
+ 
+ POFILES = @POFILES@
+ GMOFILES = @GMOFILES@
+-DISTFILES = ChangeLog Makefile.in.in POTFILES.in $(PACKAGE).pot \
++DISTFILES = Makefile.in.in POTFILES.in $(PACKAGE).pot \
+ $(POFILES) $(GMOFILES)
+ 
+ POTFILES = \

@@ -1,0 +1,62 @@
+This is the Windows binary for Heroes, cross-compiled
+from Linux and linked statically against SDL 1.2.3,
+SDL_mixer 1.2.0 and MinGW (from the mingw32 Debian package).
+
+The man page and info file have been replaced by an html page in
+the doc/ directory.
+
+Heroes has been configured with the following options:
+--host=i586-mingw32msvc --prefix=/heroes --enable-html-doc=/heroes/doc
+--with-sdl
+
+SDL and SDL_mixer have been configured with:
+--host=i586-mingw32msvc --target=i586-mingw32msvc --build=i586-linux
+--enable-static --disable-shared
+
+-----
+
+Heroes is similar to the "Tron" and "Nibbles" games of yore, but
+includes many graphical improvements and new game features.
+
+Heroes source code is available from its home page:
+http://heroes.sourceforge.net/
+
+The game is distributed under the terms of the GNU General Public License:
+http://www.gnu.org/copyleft/gpl.html
+
+-----
+
+The Simple DirectMedia Layer (SDL for short) is a cross-platfrom library
+designed to make it easy to write multi-media software, such as games and
+emulators.
+
+The Simple DirectMedia Layer library source code is available from:
+http://www.libsdl.org/
+
+This library is distributed under the terms of the GNU LGPL license:
+http://www.gnu.org/copyleft/lesser.html
+
+-----
+
+The SDL_mixer library is a simple multi-channel audio mixer.
+It supports 4 channels of 16 bit stereo audio, plus a single channel
+of music, mixed by the popular MikMod MOD, Timidity MIDI and SMPEG MP3
+libraries.
+
+The latest version of this library is available from:
+http://www.devolution.com/~slouken/SDL/projects/SDL_mixer/
+
+This library is distributed under the terms of the GNU LGPL license:
+http://www.gnu.org/copyleft/lesser.html
+
+-----
+
+MinGW (Minimalist GNU For Windows) MinGW is a collection of header
+files and import libraries that allow one to use GCC and produce
+native Windows32 programs that do not rely on any 3rd-party DLLs.
+
+The latest version of MinGW is available from:
+http://www.mingw.org/
+
+MinGW base runtime package is uncopyrighted and placed in the
+public domain.

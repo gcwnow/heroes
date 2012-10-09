@@ -1,0 +1,15 @@
+Installation intructions
+
+ - You needs several ZIP archive to do the Heroes installation (from
+   2 to 4 depending on whether you want sound support or not).
+   See http://heroes.sourceforge.net/download.html for details.
+
+ - Unzip all archives in the same directory.
+
+ - Run `run.bat' to launch Heroes.
+   You may want to customize this file, see the embedded comments.
+
+ - Documentation files are in the subdirectory `doc'. The manual
+   is `doc\heroes.html' please read it before reporting bugs.
+
+ - Report bugs to <heroes-bugs@lists.sourceforge.net>.

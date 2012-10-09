@@ -1,0 +1,18 @@
+#!/bin/sh
+# Test to make sure that loaded level are saved identically.
+
+. $srcdir/defs || exit 1
+
+set -e
+
+for lvl in `$HEROES --list=levels | awk '{ print $2 }'`; do
+  ./lvlsave $lvl testout
+  # Don't make a binary comparison, because it's ok to have some
+  # difference like case in filename, etc.
+  $HEROESLVL -phidtw@ $lvl > testin.out
+  $HEROESLVL -phidtw@ testout > testout.out
+  diff testin.out testout.out
+done
+
+rm -f testout testin.out testout.out
+:

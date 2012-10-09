@@ -1,0 +1,420 @@
+* This file
+
+This file attempts to give some hints to people whishing to contribute
+to Heroes.
+
+Questions or suggestions about this file can be sent to
+<heroes-discuss@lists.sourceforge.net>.
+
+
+* Developer tools used in Heroes
+
+Required to bootstrap a CVS checkout:
+
+ autoconf 2.50   (from ftp.gnu.org)
+ automake 1.4d   (from sources.redhat.com/automake)
+ autogen 5.2     (from autogen.sourceforge.net)
+ gettext 0.10.38 (from alpha.gnu.org)
+ gperf		 (from ftp.gnu.org)
+ gnu make	 (from ftp.gnu.org)
+
+(numbers are *minimal* versions required)
+
+Optionally needed if you change some specific parts of the game:
+
+ help2man	 (http://www.gnu.org/software/help2man/)
+ texinfo	 (from ftp.gnu.org)
+ zip		 (ftp://ftp.cdrom.com/pub/infozip/src/zip23.tar.gz)
+ unzip		 (ftp://ftp.cdrom.com/pub/infozip/src/unzip540.tar.gz)
+
+Required to commit a patch if you have write access to the CVS server:
+
+ cvs-utils	 (from subversions.gnu.org)
+
+
+* Translating message catalogs
+
+Heroes use gettext as internationalization library, and
+gettext come with a manual which is really worth reading.
+
+Translating Heroes' messages is not as straightforward as translating
+a console-based utility would be.  In short, there are two kind of
+messages: those printed on the console (--help output, error
+messages,...), and those drawn during the game (menu entries, online
+help,...).  The former cause no particular problem.  The latter use
+home-made fonts (coming with the heroes-data package) and those fonts
+do not always implement the full Latin-1 character set.
+
+You ought to configure Heroes with --enable-debug.  When configured
+like this, Heroes will check most messages at startup and report those
+who contains non-drawable characters.
+
+
+If you have done a new translation, want to try it, but don't want to
+install all the above tools (autoconf, automake, etc.), do the
+following: open the file `configure' in your favorite editor, locate
+the line starting with `ALL_LINGUAS=' and add your language here, then
+rerun configure and reinstall the game, your catalog should be
+installed with the others.  Note that you will still need gettext
+installed.  (For people who have the latest autoconf and automake, the
+correct way to add a new catalog is to edit the same line in
+configure.ac, of course).
+
+
+* Sending patches
+
+If you patched Heroes and want to have your patch included in a next
+release, please send it to <heroes-discuss@lists.sourceforge.net>.
+(This is a general discussion list, there is presently no list
+dedicated to patches.)
+
+
+* General coding conventions
+
+We try to follow the GNU standards (with some slight modifications as
+it will be noted below) and most of their guidelines are not repeated
+here.  standards.info (available on every good GNU system) is a
+recommended reading.
+
+** Formatting
+
+Look the code around to see how the code is formated.  Basically this
+is the GNU formatting standard, except that braces are kept on the
+same line as the flow-control keywords, as in
+
+  do {
+    if (cond2) {
+      /* ... */
+    } else if (cond3) {
+      /* ... */
+    } else {
+      /* ... */
+    }
+  } while (cond1);
+
+The corresponding indent options are `-br' and `-ce'.
+
+** Typenames
+
+Typenames used in Heroes code used to be suffixed by `_t'.
+Unfortunatelly, all such typenames (ending with `_t') are reserved by
+POSIX, and OS vendors usually add new types using this convention.
+Therefore using the same naming was not a really great idea: name
+clashes occured twice (`timer_t' happened to be already defined on
+NetBSD, `level_t' was defined on OSF) before I decide to use another
+convention.
+
+Typenames in Heroes now starts with a_ or an_ (e.g. `a_level',
+`an_option').  This idea came from
+http://gcc.gnu.org/ml/gcc/2001-06/msg01006.html.
+
+** Includes
+
+Any .c-file should include "system.h" as the first included file.
+Read the beginning of system.h for more explanations.  Any .h-file
+can assume system.h has already been included, but should include
+other local headers needed (e.g. type declaration used in function
+prototypes) so that inclusion order is not important.
+
+** FIXME
+
+The keywords `FIXME:', `NOTE:', and `WARNING:' can be used to
+emphasis any comment in the sources.  Try to make the important part
+of your comment fit on the same line of the keyword, such that `grep
+FIXME: *.[ch]' give a nice summary.
+
+** ChangeLog
+
+Any change to a file that goes into the distribution should have a
+corresponding ChangeLog entry (verbosity is prefered).  Removals in
+files BUGS and TODO or additions to THANKS can be implicit
+(i.e. without ChangeLog entries).
+
+** RCS keywords
+
+Do not use them; they make mixing of files from different projects
+complicated.
+
+If you stole a file from another project which has such keywords,
+don't remove them, just "cvs add -ko" the file (-ko prevent future
+keywords substitution).  Actually just "cvs add -ko" any file.
+
+
+* Files that should not be changed
+
+Some files are auto-generated, or maintained elsewhere and
+should therefore not be modified directly.
+
+** Auto-generated files
+
+Files which will go into the distribution, but are not in the CVS
+because they can be generated from files already kept the CVS.
+
+ aclocal.m4		   (generated by aclocal
+				      from configure.ac and m4/*)
+ configure		   (generated by autoconf
+				      from configure.ac)
+ THANKS			   (generated by Makefile or GNUmakefile
+				      using autogen
+				      from src/people.{def,tpl})
+ THANKS			   (generated by Makefile or GNUmakefile
+				      using autogen
+				      from src/people.{def,tpl})
+ src/config.h.in	   (generated by autoheader
+				      from configure.ac and aclocal.m4)
+ **/Makefile.in		   (generated by automake
+				      from configure.ac)
+ arch/VisualC/VisualC.zip  (generated by arch/Makefile
+				      using zip
+				      from arch/Visual/*)
+ src/rsc_files_hash.c	   (generated by src/Makefile
+				      using gperf
+				      from src/rsc_files.gperf)
+ src/debugchn.h		   (generated by src/Makefile
+				      using AutoGen
+				      from src/debugchn.{def,tpl})
+ src/debughash.gperf	   (generated by src/Makefile
+				      using AutoGen
+				      from src/debugchn.{def,tpl})
+ src/debughash.c	   (generated by src/Makefile
+				      using gperf
+				      from src/debughash.gperf)
+ src/prefs.c		   (generated by src/Makefile
+				      using AutoGen
+				      from src/prefs.{def,tpl})
+ src/prefs.h		   (generated by src/Makefile
+				      using AutoGen
+				      from src/prefs.{def,tpl})
+ src/people.c		   (generated by src/Makefile
+				      using autogen
+				      from src/people.{def,tpl})
+ doc/heroes.info	   (generated by doc/Makefile
+				      using makeinfo
+				      from src/heroes.texi)
+ doc/debugchn.info	   (generated by doc/Makefile
+				      using AutoGen
+				      from src/debugchn.{def,tpl})
+ man/heroes.6		   (generated by man/Makefile
+				      using help2man
+				      from the Heroes binary)
+ doc/people.texi	   (generated by doc/Makefile
+				      using autogen
+				      from src/people.{def,tpl})
+ po/POTFILES.in            (generated by tools/genpotfiles.sh)
+ m4/Makefile.inc           (generated by tools/genm4mam.sh)
+
+** Not generated, but added automatically by automake or gettextize
+
+ ... and therefore not in CVS.
+
+ automake adds these
+
+ COPYING, INSTALL, tools/config.guess, tools/config.sub, tools/depcomp,
+ tools/install-sh, tools/mdate-sh, tools/missing, tools/mkinstalldirs,
+ tools/texinfo.tex
+
+ gettextize adds all the files in intl/, as well as po/Makefile.in.in
+ and ABOUT-NLS.
+
+** Files in CVS, but maintained elsewhere
+
+Avoid any change to these files, if possible.
+(And report any change upstream, of course.)
+
+ lib/alloca.c	   (from fetish)
+ lib/basename.c    (from fetish)
+ lib/dirname.c     (from fetish)
+ lib/dirname.h     (from fetish)
+ lib/ftruncate.c   (from fetish)
+ lib/getopt.c	   (from glibc)
+ lib/getopt1.c	   (from glibc)
+ lib/gnugetopt.h   (from glibc, where it is named getopt.h)
+ lib/error.c	   (from glibc)
+ lib/error.h	   (from glibc)
+ lib/hash.c        (from fetish)
+ lib/hash.h        (from fetish)
+ lib/isdir.c       (from fetish)
+ lib/malloc.c      (from fetish)
+ lib/realloc.h     (from fetish)
+ lib/realloc.h     (from fetish)
+ lib/stpcpy.c      (from fetish)
+ lib/strcasecmp.c  (from fetish)
+ lib/stripslash.c  (from fetish)
+ lib/strndup.c     (from glibc)
+ lib/xalloc.c      (from fetish)
+ lib/xmalloc.c     (from fetish)
+ lib/xstrdup.c     (from fetish)
+ m4/dos.m4         (from fetish)
+ m4/ftruncate.m4   (from fetish)
+ m4/glibc21.m4	   (from fetish)
+ m4/gnu-source.m4  (from fetish)
+ m4/malloc.m4      (from fetish)
+ m4/realloc.m4     (from fetish)
+ m4/strerror_r.m4  (from fetish)
+ po/Makefile.in.in (from fetish)
+
+Jim Meyering is keeping all the above files up to date in his fetish
+tools (fileutils, textutils, or shellutils).  The script
+tools/fetish-sync.sh can be used to upgrade all of them from the
+latest fetish release.
+
+ m4/codeset.m4     (from gettext)
+ m4/gettext.m4     (from gettext)
+ m4/iconv.m4       (from gettext)
+ m4/isc-posix.m4   (from gettext)
+ m4/lcmessage.m4   (from gettext)
+ m4/progtest.m4    (from gettext)
+
+These latter files come from the gettext package.
+
+Other files:
+
+ lib/fstrcmp.c	  (from gettext, via libit)
+ lib/fstrcmp.h	  (from gettext, via libit)
+ lib/getshline.c  (from a2ps)
+ lib/getshline.h  (from a2ps)
+ lib/w_dirent.c   (from mingw, originally dirent.c)
+ lib/w_dirent.h   (from mingw, originally dirent.h)
+
+** Autogenerated, kept in CVS
+
+ README: generated by the root Makefile from the Texinfo manual (when
+	 you run `make README' or `make dist').  It needs to be kept
+	 in CVS because it is checked out by the webpages' Makefile.
+
+* CVS
+
+** Building from CVS
+
+As generated files are not all kept in CVS, you need to generate them
+after your first checkout.  This is done by running GNU make.  The
+first time you run make on your CVS checkout it will generate the file
+THANKS and AUTHORS, and then call the script tools/cvsboot.sh which
+will take care of generating the other missing file.  After you have
+run cvsboot, you will be able to make a first build first build
+(./configure; make) to create the documentation and the other files
+generated by Makefile rules.
+
+cvsboot calls a few other commands you may want to use separately:
+  tools/upgettext.sh:   populate intl/, and install some other gettext files
+  tools/autogen.sh:	build autotools files (configure, */makefile.in, etc.)
+  tools/genm4mam.sh:	build m4/Makefile.am
+  tools/genpotfiles.sh:	build po/POTFILES.in
+
+All these commands shoud be run from the top level directory.
+
+** Committing changes
+
+If you have write access to the CVS, you shall use clcommit to commit
+your patches (clcommit can be obtained from the cvs-tools modules of
+subversion.gnu.org CVS server).
+
+clcommit will use your ChangeLog entry as a commit message, and complain
+if you forgot to make a ChangeLog entry.
+
+** Tracking other changes
+
+CVS commit are automatically sent as patches, to
+heroes-commits@lists.sourceforge.net.  You can
+subscribe to this list using the following page.
+http://lists.sourceforge.net/mailman/listinfo/heroes-commits
+
+** Committing patches from other people
+
+If there is no ChangeLog entry, write one (and add a "From <xxx@yyy>"
+comment line) or ask the author to make one.  Don't forget to put
+the author in THANKS.
+
+** Bug fixes
+
+If you fix a bug reported by someone, add a "Reported by
+<xxx@yyy>" line to your ChangeLog entry.  Put him in THANKS too.
+
+** Tag and branches
+
+The main trunk should remain the latest, bleeding edge, development
+version of the game.
+
+Releases are tagged using symbolic name such as heroes_0_5 (for heroes-0.5)
+or heroes_0_6b (for heroes-0.6b).
+
+After a public release there is usually an errata branch
+(e.g. heroes_0_6_errata) created, and rooted on the corresponding
+release version.  This branch is for important bug fixes (e.g. bugs
+that prevent the game to compile or run).  Every patch commited to
+that branch should be merged in the main trunk.
+
+
+* Design guidelines
+
+** Console output
+
+There is four kinds of console messages in Heroes.
+a) warning messages, i.e., non fatal errors; output with wmsg()
+b) error messages, for fatal errors; output with emsg()
+c) debug messages, i.e. traces selected with
+   the `-v' switches; output with dmsg().
+d) standard messages; output with printf(), puts() or whatever.
+
+Groups a) and b) are printed to stderr because they are errors, while
+groups c) and d) are printed to stdin because they are answers
+to user requests (e.g. the output of --help goes to stdout because
+the user asked for it).
+
+As far i18n is concerned, the idea is to internationalize only what
+is worth to the user, and keep in english all messages destined to
+the developper.  Therefore groups a), b), and d) are translated, while
+group c) is not.
+
+
+* Release process
+
+** Before a public release
+
+ - Update externally-maintained files
+ - Update administrative files:
+   + src/people.def (add new contributions if not already done)
+   + NEWS, TODO, BUGS must be up to date
+ - Set version number in configure.ac
+ - run tools/cvsboot.sh and make a dummy build
+   (to update the generated file to the new version)
+ - build the distribution using `make distcheck' in addition to making
+   a distribution, this will actually perform five builds of the
+   game using differents configurations (so you need all supported libraries
+   installed to do that)
+
+If the above was successful:
+
+ - commit the changes to CVS
+ - tag the repository (cvs tag heroes_xx_yy)
+ - update the webpages (the repository needs to be tagged before)
+
+** Where to upload
+
+ SourceForge
+    ftp://upload.sourceforge.net/incoming/
+    https://sourceforge.net/project/admin/editpackages.php?group_id=7982
+ MetaLab
+    ftp://metalab.unc.edu/incoming/Linux/
+
+** Where to announce
+
+ - mail:
+    heroes-announce@lists.sourceforge.net
+    games-announce@lists.sourceforge.net
+    news@linuxgames.com  (http://www.linuxgames.com/)
+    sdl-announce@lokigames.com
+
+ - news:
+    comp.os.linux.applications (moderated)
+
+ - web:
+    http://freshmeat.net/projects/heroes/
+    http://www.linuxapps.com/?page=update&id=3154
+    http://happypenguin.org/show?Heroes
+    https://sourceforge.net/news/submit.php?group_id=7982
+
+
+Local Variables:
+mode: outline
+End:

@@ -1,0 +1,785 @@
+2002-03-30  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.21.
+	* NEWS, ANNOUNCE: Update for 0.21.
+
+	* doc/heroes.texi (Getting Heroes): Mention heroes-hq-sound-tracks.
+
+2002-03-30  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/musicfiles.c (st_uninit, st_init): New functions.
+	(st_free, st_cons): Use them.
+	(add_sound_track_cons): If the alias already exist, override it.
+	This used to be done by hash_insert.
+
+2002-03-30  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* doc/heroes.texi (heroesrc): Don't use `:' in index entry names.
+
+2002-03-30  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/etc/heroesrc: Try to read soundfiles from
+	$(data-dir)/hqmod/sound.conf too.
+
+2002-03-26  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/lvl/en_head.c (encode_level_header): Clear unused bytes
+	before saving.
+	* src/lvl/en_body.c (encode_level_body): Zero initialize the
+	square_walls_in array.
+
+2002-03-26  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/lvl/de_body.c (decode_level_body): Initialize
+	lvl->square_direction for all square, even when it doesn't matter.
+	Otherwise `heroeslvl' will display some uninitialized directions.
+
+2002-03-26  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/sprunish.c (compile_sprunish): Check for src<eol before
+	dereferencing *src, not after.
+	* src/userconf.c (read_userconf): Don't free strings installed
+	in the environment using putenv.
+
+2002-03-11  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/ggi/video.c: s/negociate/negotiate/.
+	(setup_WWWxHHHxB_display): Don't call ggiSetMode unless
+	ggiCheckMode succeeded.
+	From Brian S. Julin <bri@tull.umassp.edu>.
+
+2002-02-07  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.20.
+	* NEWS, ANNOUNCE: Update for 0.20.
+
+2002-02-06  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroes.c (play_game): Process input directions right before
+	updating the game state, not after the next display.  This was
+	reported to improve responsiveness significantly.
+	Reported by Tomas Pospisek.
+
+2002-02-06  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/levellst.c (cmp_levels): Fix the sorting order of levels,
+	broken since 0.12d.
+	Reported by Raphaël Poss.
+
+2002-02-03  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/hedlite.c (gestclav) <HK_i>: Don't ignore tile #0 when
+	propagating walls to neighbors.
+	Reported by Ingo.
+
+2002-02-01  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* m4/h-mikmod.m4 (heroes_CHECK_MIKMOD): Complete LIBMIKMOD_LIBS
+	with the output of libmikmod-config --ldadd, required to build
+	Heroes since libmikmod 3.1.10.
+
+2002-02-01  Ingo van Lil  <inguin@gmx.de>
+
+	* src/lvl/lvl.h (lvl_tile_type): Fix the type of the tile argument.
+	* src/lvl/privacc.c (lvl_tile_type): Likewise.
+	* src/lvl/access.h (READ_U16): Typo.
+
+2002-01-28  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.19.
+	* ANNOUNCE, NEWS, arch/mingw32/dest-readme-lib: Update for 0.19.
+
+2002-01-25  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/lvl/en_head.c: Do not include xstrduplwr.h.
+
+2002-01-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* arch/mingw32/cross.sh (cross_install): Use make install-strip.
+	(STRIPPROG): Remove.
+
+2002-01-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* misc/copytile.c (copy_tile4): New function.
+	(main): Call it.
+	* src/sprshade.c (draw_sprshade): Remove FIXME about memcpy being
+	possibly faster.
+	* src/sprrle.c (draw_sprrle): Likewise.
+
+	* src/lvl/README: Update.
+
+2002-01-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* TODO: Add some items I posted to heroes-discuss a
+	couple of week ago.
+
+2002-01-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/system.h (getopt.h): Disable MinGW's definition of __argc
+	and __argv during the inclusion of getopt.h.
+
+2002-01-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* lib/filelock.c (file_unlock): Use _LK_UNLCK instead
+	of _LK_UNLOCK (it seems this has changed in MinGW32), but
+	still support _LK_UNLOCK just in case.
+
+2002-01-23  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.18b.
+	* NEWS: Update.
+
+	* tests/Makefile.am (EXTRA_PROGRAMS): Replace by ...
+	(check_PROGRAMS): ... this.
+
+2002-01-22  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* misc/copytile.c: New file.
+	* Makefile.am (EXTRA_DIST): Add it.
+	* src/render.c (copy_tile): Point people to misc/copytile.c.
+
+2002-01-22  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/lvl/lvl.h (SQR_COORD_X_HOLD, SQR_COORD_Y_HOLD): Rename as ...
+	(SQR_COORD_X_VALID, SQR_COORD_Y_VALID): ... these.
+	(SQR_COORD_VALIDE): New macro.
+	* src/lvl/en_body.c (en_reverse_walls): Adjust.
+
+2002-01-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/lvl/lvl.h (SQR_COORD_X_HOLD, SQR_COORD_Y_HOLD): New macros.
+	* src/lvl/en_body.c (en_reverse_walls): Simplify, don't add
+	wall to border squares (this is already done on loading),
+	don't compute `dest' before it is needed.
+
+2002-01-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/lvl/loadmac.h, src/lvl/savemac.h: Delete and merge into ...
+	* src/lvl/access.h: ... this file.
+	* src/lvl/de_body.c, src/lvl/en_body.c: Extract format-related
+	macros into ...
+	* src/lvl/format.h: ... this new file.  Macros from de_body.c are
+	all prefixed with GET_; macros for en_body are rewritten
+	using a SET_ prefix, take a new 'val' argument, and use the
+	endian-safe macros from access.h.  Adjust all user functions.
+	* src/lvl/Makefile.inc (lvl_libhlvl_a_SOURCES): Remove
+	lvl/savemac.h, and lvl/loadmac.h.  Add lvl/format.h and
+	lvl/access.h.
+
+2002-01-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/system.h (S_IRUSR, S_IRGRP, S_IROTH, S_IWUSR, S_IWGRP,
+	S_IWOTH, S_IXUSR, S_IXGRP, S_IXOTH, S_IRWXU, S_IRWXG, S_IRWXO,
+	S_IXUGO, S_IRWXUGO, S_IRUGO, S_IWUGO, S_IRWUGO): New macros.
+	* src/lvl/save.c (lvl_save_file): Create the file in S_IRWUGO mode.
+
+	* tests/lvlsave.c: Include error.h.
+
+2002-01-21  Ingo van Lil  <inguin@gmx.de>
+
+	* src/lvl/en_body.c (en_reverse_walls): Fix warnings.
+	* src/lvl/en_head.c (encode_level_header): Likewise.
+	* src/lvl/save.c (lvl_save_header_file, lvl_save_file): Likewise.
+
+2002-01-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* doc/heroes.texi (configure options): Document
+	--enable-optimizations' argument.
+	* m4/devel.m4 (adl_ENABLE_DEVEL): Set enable_optimizations to -O.
+	* m4/gccoptim.m4 (ad_GCC_OPTIM): Handle $enable_optimizations.
+
+2002-01-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	Test that saved levels are identical to loaded levels.
+
+	* tests/Makefile.am (lvlsave_LDADD, lvlsave_SOURCES,
+	EXTRA_PROGRAMS, INCLUDES, AM_CFLAGS): New variables.
+	(TESTS): Add lvlsave.test.
+	* tests/lvlsave.test, tests/lvlsave.c: New files.
+	* tests/defs: Set HEROESLVL.  Handle VERBOSE=x.
+
+2002-01-20  Ingo van Lil  <inguin@gmx.de>
+
+	Teach liblvl how to save a level.
+
+	* src/lvl/en_body.c, src/lvl/en_head.c, src/lvl/save.c,
+	src/lvl/savemac.h: New files.
+	* src/lvl/Makefile.inc (lvl_libhlvl_a_SOURCES): Add them.
+	* src/lvl/lvl.h (lvl_save_file): New function.
+	* src/lvl/lvl_priv.h (encode_level_header, encode_level_body):
+	New function.
+
+2002-01-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroeslvl.c (version): Bump copyright year to 2002.
+
+2002-01-17  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/pendulum.c, src/pendulum.h: New files.
+	* src/Makefile.am (HEROES_SOURCES): Add them.
+	* src/heroes (pendulum_create, pandulum_one_step,
+	pendulum_update): Move these functions ...
+	* src/pendulum.c (pendulum_create, pendulum_one_step,
+	pendulum_update): ... here.  And adjust them to
+	work with...
+	(a_pendulum): This new struct.
+	* src/heroes.c (play_game, play_demo): Adjust to use
+	the new interface.
+
+2002-01-17  Ingo van Lil  <inguin@gmx.de>
+
+	Alt+Enter toggles full screen mode.
+
+	* src/media/sdl/video.c (Handle_AltEnter): New function.
+	(init_SDL): Setup Handle_AltEnter as an event filter.
+
+2002-01-17  Ingo van Lil  <inguin@gmx.de>
+
+	* src/readmake.c (a_margin_list_item, a_margin_list): New structs.
+	(init_margins, add_margin, free_margins): New functions.
+	(compute_width, compile_reader_data): Use the new structs and
+	functions to allocate memory for margins dynamically, instead of
+	using and static array.
+
+2002-01-14  Ingo van Lil  <inguin@gmx.de>
+
+	* src/heroes.c (find_free_way): Ignore explicit turn back.
+
+2002-01-14  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/menus.c (editor_selector, extra_menu): Fix gcc-3.0 warnings.
+
+2002-01-09  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.18a.
+	* NEWS: Update.
+	* src/argv.c (version): Bump copyright year to 2002.
+
+	* m4/libalt.m4 (LIBALT_LDFLAGS, LIBALT_LDADD, LIBALT_LOCAL_LDADD):
+	Rename as ...
+	(LIBALT_XLDFLAGS, LIBALT_XLDADD, LIBALT_LOCAL_XLDADD): ... these.
+	* src/Makefile.am: Adjust.
+
+2002-01-07  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroes.c (ai_throttle): Use player[c].invincible instead of
+	ia_is_invincible.
+
+2002-01-07  Ingo van Lil  <inguin@gmx.de>
+	    Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroes.c (ai_throttle): New function.
+	(update_player): Call it.
+	(reinit_player): Initialize player[p].pos.
+
+2002-01-01  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/Makefile.am (heroes_SOURCES): Remove font_help.hh
+	* src/font_help.hh: Delete.
+
+2001-12-30  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/ggi/video.c (dont_request_8bit_mode): New flag.
+	(set_display_params): Set dont_request_8bit_mode if `-G not8'.
+	(setup_320x200x8_display): Do nothing if dont_request_8bit_mode.
+	* doc/heroes.texi (Invoking heroes, Troubleshooting): Document this.
+
+2001-12-29  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/Makefile.am (parafmt_check_LDADD): New.
+
+2001-12-27  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac (ALL_LINGUAS): Add pt_BR.
+	* po/pt_BR.po: New file.
+	From Luzemario Dantas Rocha <luza.solucao@uol.com.br>.
+
+2001-12-15  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.18.
+	* ANNOUNCE, NEWS: Update.
+
+2001-12-15  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* po/de.po: Update copying/warranty message.
+	From Ingo van Lil <inguin@gmx.de>.
+
+2001-12-14  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* po/fr.po: Update (use new latin-1 characters).
+
+2001-12-14  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/camera.c (compute_corner): Don't take `two_player' into
+	account while we are `in_menu'.  (Fix a bug introduced in 0.12c.)
+	Reported by Ingo van Lil <inguin@gmx.de>.
+
+2001-12-14  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/fontdata.c (initialize_deck_font): Revert change from
+	2001-12-12.
+	Reported by Ingo van Lil <inguin@gmx.de>.
+
+2001-12-14  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* po/de.po: Update (use new latin-1 characters).
+	From Ingo van Lil <inguin@gmx.de>.
+
+2001-12-13  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.17a.
+	* NEWS, HACKING: Update.
+
+2001-12-12  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* tests/defs: Don't assume heroes has been built in $srcdir.
+
+	* Makefile.am (my-distcheck-nodisplay, my-distcheck-ggi):
+	Run `make check'.
+	(my-distcheck-allegro): New target.
+	(distcheck-hook): Depend upon my-distcheck-allegro.
+
+	* doc/heroes.texi (Libraries): Add an entry for Allegro.
+	(configure options): Document --with-allegro.
+	(Machines): Pretend that Heroes-Allegro works on Linux/i386.
+	* m4/h-allegro.m4: "unhide" the check for Allegro.
+
+2001-12-12  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	Support Latin-1 characters in `help reader' and `big' fonts.
+
+	* src/rsc_files.gperf: Add big-font.
+	* src/fontdata.c (big_font_img): New variable.
+	(uninit_fonts): Free big_font_img.
+	(initialize_menu_font): Use big_font_img.
+	(initialize_deck_font): Don't convert lowercase	letters to
+	upper case letters in DEBUG mode.
+	(compute_text_width): Use UCHAR.
+	* src/sprtext.c (compile_sprtext, compile_sprtext_color):
+	Test whether width[ch]!=0 to make sure character ch is supported,
+	not upper_left[ch]!=0.
+	(compile_sprtext_color): Use UCHAR.
+
+2001-12-12  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/allegro/joystick.c (get_joystick_state): Reset
+	joystick axes when needed.
+
+2001-12-11  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* po/de.po: Update.
+	From Ingo van Lil <inguin@gmx.de>.
+
+2001-12-10  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	Joystick support for Allegro.  (Untested yet, I have no joystick
+	on this host...)
+
+	* m4/h-joystick.m4: Add LIBALT support for the Allegro joystick
+	driver (allj).
+	* m4/h-allegro.m4: Don't handle allj here.
+	* m4/h-media.m4: Consider allk for selection.
+
+	* src/media/allegro/joystick.c: New file.
+	* src/media/allegro/video.c (heroes_init_allegro): New function.
+	(init_video_low): Call heroes_init_allegro() instead of init_allegro().
+	* src/media/Makefile.inc (EXTRA_LIBRARIES): Add media/libhallj.a.
+	(media_libhallj_a_CFLAGS, media_libhallj_a_SOURCES): New variables.
+
+2001-12-10  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/allegro/keyb.c (process_input_events): Call	clear_keybuf().
+	* src/heroes.c (play_game): Call keycode_to_ascii().
+
+2001-12-09  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/allegro/video.c (init_allegro): Call install_mouse ().
+	* src/media/allegro/keyb.c (enable_mouse): Remove.
+
+2001-12-09  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/keyb.h (keycode_to_ascii): Declare.
+	* src/media/dummy/keyb.c (keycode_to_ascii): Define.
+	* src/media/sdl/keyb.c (keycode_to_ascii): Define.
+	* src/media/ggi/keyb.c (keycode_to_ascii): Define.
+	* src/media/allegro/keyb.c (keycode_to_ascii): Define.
+	* src/menus.c (editor_menu, enter_your_name): Use it.
+
+2001-12-09  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroes.c (get_input_directions): Don't assume keyboard_map
+	contains 0 or 1 (that's not true with Allegro).
+	* src/media/Makefile.inc (media_libhallvkm_a_CFLAGS): Don't use
+	$(MORE_WARNINGS_CFLAGS).
+	* src/sys/Makefile.inc (sys_libhallm_a_CFLAGS): Likewise.
+
+2001-12-07  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/Makefile.am (GGI_CFLAGS, GII_CFLAGS, LIBMIKMOD_CFLAGS,
+	SDL_CFLAGS, SDL_MIXER_CFLAGS, ALLEGRO_CFLAGS): Define.
+
+	* m4/gccwarn.m4 (CF_GCC_MORE_WARNINGS): Add -Werror.
+
+	* lib/cast.h, lib/cast.c: New files.
+	* lib/Makefile.am (libheroes_a_SOURCES): Add them.
+	* src/vars.c (var_get_value): Call const_cast_string ().
+	* src/musicfiles.c (get_sound_track_from_alias): Likewise.
+	* src/media/mikmod/strack.c (init_sound_engine): Likewise.
+	* src/media/sdl/video.c (uninit_video_low): Likewise.
+	(init_video_low): Cast SDL_ALLEVENTS to Uint8.
+
+2001-12-02  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Check for declaration of strerror.
+
+	* lib/error.c, lib/hash.c, lib/hash.h, lib/xstrdup.c: Update from
+	textutils-2.0.18.
+
+	* lib/unlocked-io.h: New (empty) file.  Needed by lib/error.c.
+	* lib/Makefile.am (libheroes_a_SOURCES): Add it.
+
+	* src/musicfiles.c (get_sound_track_from_alias): Use hash_lookup.
+	* src/vars.c (var_get_value): Likewise.
+
+2001-11-28  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/Makefile.inc (media/ggi/keysdef.c, media/sdl/keysdef.c,
+	media/allegro/keysdef.c): Allow these file to be built even if their
+	source file do not exists.  This is needed by target such as TAGS.
+
+2001-11-28  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/Makefile.am, src/media/Makefile.inc, src/sys/Makefile.inc:
+	Use $(MUMBLE) instead of @MUMBLE@ for
+	AC_SUBST'ed variables.
+	* arch/Makefile.inc, tools/Makefile.inc, src/etc/Makefile.inc: Add
+	emacs hint for Makefile mode.
+
+	* m4/gccwarn.m4 (CF_GCC_MORE_WARNINGS): Don't include $(CFLAGS) in
+	MORE_WARNINGS_CFLAGS.
+
+2001-11-25  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/media/Makefile.inc (DISTCLEANFILES): Add media/allegro/keydef.c.
+	(media/ggi/keysdef.c, media/sdl/keysdef.c,
+	media/allegro/keysdef.c): Depend upon .dirstamp in each directory.
+
+2001-11-19  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.17.
+	* tests/Makefile.am (EXTRA_DIST): Add $(TESTS).
+
+2001-11-19  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroes.c (heroes_main): Set system-conf from the
+	HEROES_SYSTEM_CONF envvar.
+	* tests/Makefile.am (EXTRA_DIST): Add defs.
+	* tests/defs: Set HEROES_SYSTEM_CONF to $srcdir/../src/etc/heroesrc,
+	otherwise the testsuite would use the (maybe not installed)
+	system configuration.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* ANNOUNCE, NEWS: Update for 0.17.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* tests/demo.test, tests/intro.test, tests/defs,
+	tests/Makefile.am: New file.
+	* Makefile.am (SUBDIRS): Add tests.
+	* configure.ac: Output tests/Makefile.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/argv.h (a_check, check_what): New.
+	* src/argv.c (check): New function.
+	(long_options): Add --check.
+	(parse_argv): Call check().
+	* src/heroes.c (heroes_main): Handle check_intro.
+	(main_menu): Handle check_demo.
+	* src/const.c (key_or_joy_ready): Handle check_demo.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/sprglenz.c (compile_sprglenz): Check for src<eol before
+	dereferencing *src, not after.
+	* src/sprrle.c (compile_sprrle): Likewise.
+	* src/sprshade.c (compile_sprshade): Likewise.
+	* src/sprunish.c (compile_sprunish): Likewise.
+	Suggested by Daniel.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/render.c (draw_vehicle_tail): Thinko, resulting in a SEGV :(
+	Reported by Daniel.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.16.
+	* NEWS, ANNOUNCE: Update for 0.16.
+
+2001-11-18  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Don't AC_SUBST(LIBOBJS), it's already done.
+
+2001-11-17  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* doc/heroes.texi (Machines): Add a notice for Suse 7.1 users.
+	* BUGS: Update.
+
+2001-11-17  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* doc/doc.scm: New file (define import-head and import-tail).
+	* doc/Makefile.am (EXTRA_DIST): Add doc.scm.
+	(heroes_TEXINFOS, CLEANFILES, debugchn.texi, people.texi): Remove.
+	(heroes.texi): Build from debugchn.tpl, people.tpl, and heroes.texi
+	itself.
+	* doc/heroes.texi: Merge vr and cp at the beginning (it has no effect
+	on dvi output otherwise).  Add START and END markers for
+	debugchn.texi and people.texi output.
+	* src/debugchn.tpl, src/people.tpl: Call import-head and import-tail
+	for texi output.
+
+2001-11-16  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* lib/error.c, lib/getopt.c, lib/hash.c, m4/strerror_r.m4: Update
+	from fileutils-4.1.1.
+
+2001-11-11  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* BUGS: Suppress Benjamin Preidecker's report about Heroes 0.5
+	frozen with KGI error messages.
+	Christoph Egger <Christoph_Egger@t-online.de> (GGI devel)
+	says it's obsolete.
+
+2001-11-09  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* ChangeLog.01: New file.
+	* Makefile.am (EXTRA_DIST): Add it.
+
+2001-11-08  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/const.c (trail_way, square_way): Define as an array
+	of a_dir8_pair.
+	* src/const.h (trail_way, square_way): Likewise.
+	* src/heroes.c (reinit_player, update_player): Use DIR8_PAIR.
+	(grow_trail): Beautify.
+	* src/lvl/lvl.h (DIR8_TAIL, DIR8_HEAD, DIR8_PAIR): New macros.
+	* src/render.c (draw_trail_real, draw_vehicle_tail,
+	draw_vehicle_head, draw_trail_tail): Use a_dir8_pair, REVERSE_DIR,
+	and DIR8_PAIR.
+
+	* src/heroes.c (shrink_trail): Don't redraw the trail tail
+	if the trail has been erased.  This completes the fix from
+	2001-10-28.
+
+2001-10-28  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/heroes.c (update_player): Call erase_trail() before
+	shrink_trail() when a player is destroyed.
+	Reported by Daniel Burrows.
+
+2001-10-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: AC_CHECK_DECLS for strnlen.
+
+2001-10-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump version to 0.15.
+	* NEWS, ANNOUNCE: Update for 0.15.
+
+	Modernize lib/Makefile.am.
+
+	* lib/Makefile.am (CFLAGS): Remove (useless).
+	(EXTRA_DIST, libheroes_a_DEPENDENCIES): Remove (automatically
+	filled by Automake).
+	(noinst_HEADERS): Merge with libheroes_a_SOURCES.
+	* configure.ac: AC_REPLACE_FUNC strndup.
+
+	Avoid duplication of CFLAGS on targets using per-target CFLAGS.
+
+	* src/Makefile.am (CFLAGS): Don't define this variable, but ...
+	(AM_CFLAGS): ... define this one instead.
+	(parafmt_check_CFLAGS): Remove @CFLAGS@.
+	* src/media/Makefile.am (media_libhggivkm_a_CFLAGS,
+	media_libhgiij_a_CFLAGS, media_libhmiks_a_CFLAGS,
+	media_libhsdlvkm_a_CFLAGS, media_libhsdlj_a_CFLAGS,
+	media_libhsdls_a_CFLAGS, media_libhallvkm_a_CFLAGS): Likewise.
+	* src/sys/Makefile.inc (sys_libhsdlm_a_CFLAGS,
+	sys_libhallm_a_CFLAGS): Likewise.
+
+2001-10-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* BUGS: Update with input from Eero Tamminen <oak@welho.fi>.
+
+2001-10-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* tools/autogen.sh (moreverb): Use automake --force-missing.
+	Don't run autoheader if AC_CONFIG_HEADER is not called.
+	Call autoconf before autoheader, so the latter can use
+	the traces cached during the run of the former.
+
+2001-10-14  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	Rewrite the explosion code (again).  This fix some issues present
+	in the old explosion handling: 1- the explosions could propagate
+	to the neighboring square already activated (leading to an
+	exponential growth of the number of explosions, hindering
+	game-play as reported by Daniel); 2- the propagation did not occur
+	at a precise time after activation (see comment in the code); 3-
+	vanished explosions were not immediately removed from explo_list.
+
+	* src/explosions.c (an_explosion_info): Remove frame_start.
+	(allocate_explosions): Reset explo_time.
+	(compute_explosion_state, propagate_to_neighbors_maybe,
+	trigger_eplosion_at_time): New functions.
+	(trigger_explosion, trigger_possible_explosion,
+	update_explosions): Rewrite functions.
+	* src/explosions.h (square_explo_type, trigger_explosion): Fix type.
+	(EXPLOSION_SQUARE_TRIGGERED_P,
+	EXPLOSION_SQUARE_TRIGGERABLE_P): New macros.
+
+2001-10-05  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* m4/checkpkg.m4 (AC_caolan_CHECK_PACKAGE): Quote strings.
+	* m4/pkgeneric.m4 (AC_adl_PKG_GENERIC): Likewise.
+	* m4/w_dirent.m4 (adl_FUNC_READIR): Add missing comma.  I wonder
+	how this macro could ever work.
+	* m4/h-sdlmixer.m4 (heroes_CHECK_SDL_MIXER): Use $SDL_LIBS.
+
+2001-09-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* lib/alloca.c, lib/basename.c, lib/dirname.c, lib/dirname.h,
+	lib/error.c, lib/error.h, lib/getopt.c, lib/getopt1.c,
+	lib/gnugetopt.h, lib/hash.c, lib/stripslash.c, m4/dos.m4,
+	m4/ftruncate.m4, m4/gnu-source.m4, m4/lcmessage.m4, m4/malloc.m4,
+	m4/progtest.m4, m4/realloc.m4, m4/strerror_r.m4: Update from
+	textutils-2.0.15.
+	* HACKING, tools/fetish-sync.sh: Add lib/dirname.c and
+	lib/dirname.h.
+	* lib/stripslash.h: Delete.
+	* lib/Makefile.am (noinst_HEADERS): Remove lib/stripslash.h.
+	* src/hedlite.c, src/relocate.c, src/userdir.c: Include
+	"dirname.h" instead of "stripslash.h".
+
+2001-09-22  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Bump to version 0.14.
+	* po/fr.po: Update.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* ANNOUNCE: Update for 0.14
+	* NEWS: Likewise.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* HACKING: Update help2man URL.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/people.def (Romuald Genevois): Update www.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* tools/readme.sed: Update License.
+	* doc/heroes.texi (Getting Heroes): Update Metalab link, now Ibiblio.
+	(Libraries): Update the LibMikMod home page.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	Change the license from 'GPL version 2 or any later version'
+	to 'GPL version 2'.
+
+	* Makefile.am, configure.ac, arch/Makefile.inc, doc/Makefile.am,
+	lib/Makefile.am, man/Makefile.am, src/Makefile.am, src/argv.c,
+	src/argv.h, src/bonus.c, src/bonus.h, src/bytesex.h, src/camera.c,
+	src/camera.h, src/const.c, src/const.h, src/debughash.h,
+	src/debugmsg.c, src/debugmsg.h, src/endscroll.c, src/endscroll.h,
+	src/errors.c, src/errors.h, src/explosions.c, src/explosions.h,
+	src/extras.c, src/extras.h, src/fader.c, src/fader.h,
+	src/fastmem.h, src/font.h, src/font_help.h, src/fontdata.c,
+	src/fontdata.h, src/gameid.c, src/gameid.h, src/generic_list.h,
+	src/hedlite.c, src/hedlite.h, src/helptext.c, src/helptext.h,
+	src/hendian.c, src/hendian.h, src/heroes.c, src/heroes.h,
+	src/heroeslvl.c, src/intro.c, src/intro.h, src/items.c,
+	src/items.h, src/levellst.c, src/levellst.h, src/locales.c,
+	src/locales.h, src/menus.c, src/menus.h, src/misc.c, src/misc.h,
+	src/musicfiles.c, src/musicfiles.h, src/parafmt.c, src/parafmt.h,
+	src/pcx.c, src/pcx.h, src/people.h, src/persona.c, src/persona.h,
+	src/pixelize.c, src/pixelize.h, src/readmake.c, src/readmake.h,
+	src/relocate.c, src/relocate.h, src/render.c, src/render.h,
+	src/renderdata.c, src/renderdata.h, src/rsc_files.c,
+	src/rsc_files.h, src/rsc_files_hash.h, src/savegame.c,
+	src/savegame.h, src/scores.c, src/scores.h, src/scrtools.c,
+	src/scrtools.h, src/sprglauto.c, src/sprglauto.h, src/sprglenz.c,
+	src/sprglenz.h, src/sprite.c, src/sprite.h, src/spropaque.c,
+	src/spropaque.h, src/sprprog.c, src/sprprog.h, src/sprprogwav.c,
+	src/sprprogwav.h, src/sprrle.c, src/sprrle.h, src/sprshade.c,
+	src/sprshade.h, src/sprtext.c, src/sprtext.h, src/sprunish.c,
+	src/sprunish.h, src/sprzcol.c, src/sprzcol.h, src/structs.h,
+	src/system.h, src/timer.c, src/timer.h, src/userconf.c,
+	src/userconf.h, src/userdir.c, src/userdir.h, src/vars.c,
+	src/vars.h, src/visuals.c, src/visuals.h, src/etc/Makefile.inc,
+	src/lvl/Makefile.inc, src/lvl/de_body.c, src/lvl/de_head.c,
+	src/lvl/free.c, src/lvl/in_body.c, src/lvl/load.c,
+	src/lvl/loadmac.h, src/lvl/lvl.h, src/lvl/lvl_priv.h,
+	src/lvl/privacc.c, src/media/Makefile.inc, src/media/joystick.h,
+	src/media/keyb.c, src/media/keyb.h, src/media/keyb_low.h,
+	src/media/keysdef.h, src/media/keyvalues.h, src/media/sfx.c,
+	src/media/sfx.h, src/media/strack.c, src/media/strack.h,
+	src/media/video.c, src/media/video.h, src/media/video_low.h,
+	src/media/allegro/keyb.c, src/media/allegro/keyvalues.c
+	src/media/allegro/video.c, src/media/dummy/joystick.c,
+	src/media/dummy/keyb.c, src/media/dummy/keysdef.c,
+	src/media/dummy/keyvalues.c, src/media/dummy/sfx.c,
+	src/media/dummy/strack.c, src/media/dummy/video.c,
+	src/media/ggi/keyvalues.c, src/media/ggi/video.c,
+	src/media/gii/joystick.c, src/media/mikmod/sfx.c,
+	src/media/mikmod/strack.c, src/media/sdl/joystick.c,
+	src/media/sdl/keyb.c, src/media/sdl/keyvalues.c,
+	src/media/sdl/video.c, src/media/sdl_mixer/sfx.c,
+	src/media/sdl_mixer/strack.c, src/sys/Makefile.inc,
+	src/sys/main.h, src/sys/allegro/main.c, src/sys/std/main.c,
+	tools/Makefile.inc: Change license.
+	* README: Update the license section.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/levellst.c (print_level_list): New function.
+	* src/levellst.h (print_level_list): New function.
+	* src/heroes.c (heroes_main): Call print_level_list().
+	* src/argv.h (showlevels): New variable.
+	* src/argv.c (showlevels): New variable.
+	(list): Handle --list=levels.
+	* doc/heroes.texi (Invoking heroes): Document --list=levels.
+
+2001-09-21  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* src/argv.c (print_help): Take a 'status' argument and use it as
+	exit value.
+	(parse_argv): Return -1 instead of 1 when the game must quit but not
+	with a non-null exit status.
+	(heroes_main): Handle return values of parse_argv().
+
+2001-09-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* configure.ac: Rewrite the configuration report.
+
+2001-09-20  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* m4/h-display.m4 (heroes_CHECK_DISPLAY_LIB): Typo preventing
+	SDL_mixer to be checked for when Allegro is not used.
+	Reported by Daniel Burrows <dburrows@brown.edu>.
+
+	* m4/h-sdl.m4 (heroes_CHECK_SDL): Don't force-append sdlj and sdls
+	in the user selections (so that for instance --with-sdl does still
+	allow giij or miks to be used without user hints)
+	* m4/h-sdlmixer.m4 (heroes_CHECK_SDL_MIXER): Don't append sdlvkm
+	and sdlj for similar reason.
+	* m4/h-joystick.m4 (heroes_CHECK_JOYSTICK_LIB) <with_sdl>: Add
+	sdlj to the user selection.
+
+2001-XX-XX
+
+	Older entries belong to ChangeLog.01.

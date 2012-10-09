@@ -1,0 +1,4 @@
+#!/bin/sh
+# Test to make sure that a demo does not segfault.
+. $srcdir/defs || exit 1
+$HEROES -g --check=demo

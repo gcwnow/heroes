@@ -1,0 +1,590 @@
+Heroes 0.21	March 30, 2002
+
+	* Support for the heroes-hq-sound-tracks package.
+	* Bug fixes:
+	  - `soundconf:' failed to override aliases.
+	  - Heroes' GGI driver failed to report an error if no
+	    two-frame mode was available.
+	  - Various code nits.
+
+Heroes 0.20	February 7, 2002
+
+	* Bug fixes:
+	  - Improve responsiveness by not delaying input processing for
+	    one iteration of the main loop.
+	  - Support the new behavior of the libmikmod-config script installed
+	    by LibMikMod 3.1.10.
+	  - Fix the sorting of levels for Quest mode. (Since 0.12d)
+	  - Fix computation of walls for tile #0 in the level editor.
+
+Heroes 0.19	January 28, 2002
+
+	* Minor portability tweaks for MinGW.
+
+Heroes 0.18b	January 23, 2002
+
+	* Alt+Enter toggles full screen mode (works only with the SDL
+	  driver and is not supported by all targets).
+	* Harmful turn backs are ignored even if the autopilot is
+	  disabled by the fire trails.
+
+Heroes 0.18a	January 9, 2002
+
+	* Brazilian Portuguese translations.
+	* Computer players will stop and speed up.
+	* `-G not8' should work around a bug in GGI.
+
+Heroes 0.18	December 15, 2001
+
+	* Bug fixes:
+	  - Display lowercase characters in deck font (introduced in 0.17a).
+	  - Fix background shift when switching from/to one player mode
+	    to/from two player mode in the "game" menu (since 0.12c).
+
+Heroes 0.17a	December 13, 2001
+
+	* This version requires heroes-data-1.4.
+	* Support Allegro as display/keyboard/joystick interface.
+	* Support Latin-1 characters in `help reader' and `big' fonts.
+
+Heroes 0.17	November 19, 2001
+
+	* Bug fix:
+	  - Segfault introduced by previous bug fix. (Ahem.)
+	* Very basic testsuite (it just runs the game in demo mode -- but
+	  that would have been enough to caught the aforementioned segfault).
+
+Heroes 0.16	November 18, 2001
+
+	* Bug fixes:
+	  - Explosions of dead players happens on the full trail (the
+	    last five squares used to not explode).
+	  - Check for the definition strlen() (prevented Heroes to
+	    compile on system lacking strndup()).
+
+Heroes 0.15	October 20, 2001
+
+	* Bug fix:
+	  - Some thinko in the explosion handling code could bring
+	    the game on its knees.  Making it momently unplayable
+	    even on fast machines. (Since 0.12a.)
+
+Heroes 0.14	September 22, 2001
+
+	* Most files are now shipped under the terms of 'GPL version 2'.
+	* New option to heroes:
+	  --list=levels: list level files.
+	* Bug fixes:
+	  - Check for SDL_mixer in configure (lost in 0.13).
+	  - Allow to fall back to LibMikMod if SDL_mixer is not available
+	    and to GII if SDL does not support Joystick (lost in 0.12e).
+	  - Don't exit with an error code on operations like --version.
+
+Heroes 0.13	September 19, 2001
+
+	* Bug fixes:
+	  - Dummy keyboard driver doesn't need GGI (0.12e).
+	  - Rename all type names to prevent clashes with POSIX types.
+	  - Fix segfault in (incomplete) Allegro support.
+
+Heroes 0.12f	August 26, 2001
+
+	* Document heroeslvl.
+	* heroeslvl is internationalized.
+	* Preliminary support for Allegro (not functional yet).
+	* Bug fixes:
+	  - Reintroduce support from SDL_main (lost in 0.12e).
+	  - Cleanup configury changes from 0.12e.
+	  - Thinko in lemmings handling (since 0.12a).
+
+Heroes 0.12e	August 22, 2001
+
+	* Interfaces with media libraries (SDL/GGI/GII/MikMod/SDL_mixer)
+	  completly revamped.  See src/media/.  This look cleaner, and
+	  should make addition of new interfaces easier.
+	* ./configure will now check for *all* supported media libraries
+	  (e.g. it used to not check for SDL if GGI was found: it will
+	  now check for both and make a selection later).
+	  --with-package options are used by the installer to give his/her
+	  *preference* on which package to use.
+	  --without-package options are used to disable the checks for
+	  package (it's probably a bug if you need this).
+	* Bug fixes:
+	  - The SDL version won't initialize sound or joystick if not needed.
+	  - Animation were looping to fast (since 0.12a).
+
+Heroes 0.12d	August 6, 2001
+
+	* Portability tweaks for MinGW and OpenBSD.
+	* Bug fixes:
+	  - Radar display was bogus on Y-wrapped levels (since 0.12a).
+	  - Prevent lemmings from entering tunnels (since 0.12a).
+	  - Sort the level list so that they are played in the same
+	    order as when level.lst was used (since 0.12b).
+	  - Wrong computation of camera position caused
+	    segfaults on unwrapped levels (since 0.12c).
+
+Heroes 0.12c	July 30, 2001
+
+	* Compile flags handling revamped:
+	  - heroes and heroeslvl do not use the same libraries.
+	  - lib/ and intl/ use less strict -Woptions than src/.
+	* heroeslvl has a manpage.
+	* heroes can be configured to not drop s-bit privileges
+	  with the `keepsuid: yes' and `keepsgid: yes' system-wide settings.
+	* Bug fixes:
+	  - A couple of memory leaks.
+	  - ``heroes-sdl -G mumble'' didn't work.
+
+Heroes 0.12b	July 24, 2001
+
+	* heroes:
+	  - Compute the list of levels on startup; level.lst is not
+            used anymore.
+	* heroeslvl:
+	  - Don't load the body of the level if only the header is needed.
+	  - Add option -pi to display tile details.
+	* common:
+	  - Free level structures once they are no longuer needed.
+	  - Load the levels with mmap if possible.
+
+Heroes 0.12a	July 16, 2001
+
+	* A new utility, heroeslvl, can load levels and dump various
+	  information.
+	* Level loading and representation code rewritten as a library
+	  (used by the game and heroeslvl, but not yet the level editor).
+	* Explosion handling code rewritten.  Two noticeable differences:
+	  - explosions from dead players are now harmful,
+	  - explosions from dead players will propagate to neighbor
+	    explosive squares.
+	* New bonus: fire trail
+	  (appears more frequently in Death Match mode).
+	* Autopilot is disabled against direct collisions with fire trails.
+
+Heroes 0.12	July 10, 2001
+
+	* Locking support for windows (untested).
+	* Bug fixes:
+	  - Heroes used to be mute on five levels.
+	  - Various cosmetic issues in menus.
+	  - Correct Joystick reading code for libggi.
+
+Heroes 0.11	May 23, 2001
+
+	* Bug fixes:
+	  - strip trailing slashes before creating directories.
+	  - don't install charset.alias on glibc 2.1 systems.
+
+Heroes 0.10b	May 21, 2001
+
+	* Open the global score/saved-game file once the game start,
+	  drop all privileges immediately afterward, and keep the file open
+	  until exit; instead of opening them many time, and switching
+	  persona for each opening.
+	* Bug fixes:
+	  - Misc. errors in documentation.
+	  - Fix display of the bottommost line in the `waves' effect.
+	  - Two typos in code that prevent compilation on non-Unix systems.
+	  - Build intl/ before other subdirectories so that libintl.h
+	    is available if needed.
+	  - Fix relocation process under MinGW by
+	     o supporting semicolon-separated PATHs
+	     o supporting \ as a directory separator
+	     o stripping trailing slashes before stat()ing directories
+	  - Heroes is now aware that gettext installs locales into
+	    $datadir/locale rather that $prefix/share/locale.  See the
+	    comment in m4/h-path.m4 for details.
+
+Heroes 0.10a	May 8, 2001
+
+	* This version requires heroes-data-1.0a.
+	* The labels in pictures of the help reader are translatable.
+	* Use a new eye-catching `tutorial arrow', without text.
+
+Heroes 0.10	May 7, 2001
+
+	* Obsolete Visual C files are not longer distributed.
+	* The CREDITS screen now thanks everybody.  By the way
+          the THANKS and AUTHORS files, the related section of the
+	  documentation, and the CREDITS screen are maintained
+	  from a single file.
+	* Bug fixes:
+	  - make sure ngettext() is available.
+	  - don't segfault if Heroes is not found in the PATH.
+
+Heroes 0.9b	May 2, 2001
+
+	* Italian translations.
+	* Drop fetish's gettext and use the latest gettext (0.10.37)
+	  - use ngettext() to handle plural forms
+	  - gettext now works under MinGW
+	* Support for conditionals in config files
+	  (undocumented, but used in src/etc/heroesrc)
+	* Improve relocation magic:
+	  - also try to use argv[0] or $PATH to compute $prefix.
+	  - document (see README)
+	* Better handling of locked files in two `dangerous' places.
+
+Heroes 0.9a	April 21, 2001
+
+	* German translations.
+	* Support for system-wide score&save files,
+	  this includes:
+	  - file locking
+	  - handling of process persona (when Heroes has the sgid or suid bits)
+	  - "tainting" of filename resources
+	  See node 'Global score file' of the manual.
+	* Save score/save/preferences files as text.
+	* Record keyboard preferences for SDL and GGI separately, so one
+	  can use both heroes-sdl and heroes-ggi without key conflicts.
+	* Better support for relocation
+	  - support for the HEROES_PREFIX environment variable
+	  - all paths are now relative to this prefix
+	  - if the default prefix is incorrect, Heroes will try to
+	    set it to the relative path from $bindir to $prefix (as
+	    supplied to the configure --prefix and --bindir option),
+	    i.e., it assumes the current directory is the executable's
+	    directory.  Not yet documented, can be improved.
+	* Bug fixes:
+	  - fix handling of extended keys in the "enter your name" screen
+	  - output debug messages to stdout
+
+Heroes 0.9	February 24, 2001
+
+	* Misc typos.
+
+Heroes 0.8f	February 20, 2001
+
+	* New configure option: --disable-display.
+	* Bug fixes:
+	  - correctly update screen on key conflicts (since 0.6c)
+	  - get support for gcc 2.7.2 back (apparently dropped since 0.6e)
+
+Heroes 0.8e	February 14, 2001
+
+	* GGI usage enhancements:
+	  - use buffer locking
+          - do double buffering when possible
+	  - don't crossblit when the display is already 8bit (== speedup
+            for people running a 8bit display)
+	* Replace the stupid lightning formula with gamma correction
+          (the scale and default value have changed, this means that
+          your current saved setup is likely to be lighter than what
+          you expect)
+	* Bug fixes:
+	  - don't set palette for non-palletized modes [GGI]
+	  - strip large keynames in keyboard menu to prevent overstrike
+
+Heroes 0.8d	February 7, 2001
+
+	* Dutch message catalog.
+	* Report non-drawable character in messages on startup.
+
+Heroes 0.8c	February 2, 2001
+
+	* One intermediate screen buffer has been removed from the
+	  rendering pipe.  The good news is that this should lead
+	  to a slight speed-up in some configuration (when stretching
+	  is used or when display require locking).  The bad news is
+	  that shading the screen in the PAUSE and QUIT menus
+	  is no longer possible, therefore this has been changed.
+	* The middle mouse button can be used to select a temporary
+	  tile in the level editor (for tunnel setup).
+	* configure changes:
+	  - CFLAGS now defaults to `-g'
+	  - New options: --with-mpatrol, --with-mtrace.
+	* Bug fixes:
+	  - compilation for targets not using gettimeofday (e.g. mingw32)
+	    was not fixed correctly in 0.8a...
+	  - the `catch bonuses' behavior (used by computer opponents) was
+	    lacking the call to the valuation function since 0.6d!
+
+Heroes 0.8b	Juanary 11, 2001
+
+	* Cleanup of config.h's #define macros.
+	* Improvement and fixes in Makefiles' maintainer targets.
+	* Update configure options description (manual/README)
+	* configure shaking (continued):
+          New option: --enable-devel
+	  Changed: --enable-debug is now disabled by default
+	* arch/mingw32/: files used to cross-build the MinGW32
+	  package.
+
+Heroes 0.8a	Juanary 1, 2001
+
+        * Internationalization of menus and text output.
+	* French translations included.
+	* Bug fixes:
+	  - compilation for targets not using gettimeofday (e.g. mingw32)
+	    was broken since 0.7a
+	  - cross-compile build was broken since 0.7a
+	* configure has been shaked a lot:
+	  - many checks moved into separate files in m5/
+	  - New options:
+	     --disable-nls,             --enable-assert,
+             --enable-warnings,         --disable-optimizations,
+             --with-dmalloc,            --with-efence,
+	     --with-included-gettext,   --with-catgets
+	   - Renamed options:
+	     --with*-GGI* => --with*-ggi*
+	     --with*-GII* => --with*-gii*
+	     --with*-sdl_mixer* => --with*-sdl-mixer*
+	* previous releases used to strip binaries by default,
+	  this is no longer the case: use `make install-strip' instead.
+
+Heroes 0.8	December 20, 2000
+
+	* Bug fixes:
+	  - --without-mikmod was not always taken into account (since 0.6)
+	  - the key configurator was not working properly (since 0.6c)
+	  - memory leaks (since 0.7b)
+	  - segfault due to the help reader (since 0.7b)
+
+Heroes 0.7b	December 18, 2000
+
+	* full rewrite of the help reader
+	* remove the end-scroller
+	* lib/ and m4/ update
+	* the 'txt_cfg/' directory no longer exists
+
+Heroes 0.7a	December 7, 2000
+
+	* use autoconf 2.49b
+        * make sure in configure that the selected libraries are
+          correctly installed
+	* the file 'txt_cfg/txti.cfg' is no longer used
+	* New option:
+	  -4, --quadruple: stretch the screen fourfold.
+	* Bug fixes:
+	  - add a warning in the documentation and a workaround
+	    in the code for the buggy compiler shipped with
+	    Red Hat 7.0
+	  - fix the color selection function used when linked with SDL
+	  - fix wrapping of counters after 127 in TIME CASH and COLORS
+            modes
+	  - fix wrong timing calculation (could cause stalls)
+	  - adds @direntry and @dircategory commands in the Texinfo
+	    manual
+	  - explicitly forbid turn backs in the game (can otherwise
+	    cause segfaults on some levels)
+
+Heroes 0.7	November 29, 2000
+
+	* Bug fixes:
+	  - failed assertion in sfx.c (since 0.6d)
+	  - vehicle drawing at tunnel output (caused segfaults since 0.6e)
+	  - TIME CASH and COLOR modes endings (pre 0.1 bug)
+
+Heroes 0.6f	November 25, 2000
+
+	* Fixes for recent (0.6d) bugs:
+	  - unfreed memory blocks
+	  - various typos
+	  - inaccurate waving effect (uncleared pixels on the right side)
+	  - redundant error messages when decoding sound options (SDL_mixer)
+	* Fixes for older (pre 0.1) bugs:
+	  - thinko in vehicle drawing functions
+	  - fence-post read in the help reader
+	* Updated VisualC files.
+
+Heroes 0.6e	November 20, 2000
+
+	* New section `Machines' in Texinfo manual (and README)
+	* New icons (misc/heroes-?.xpm)
+	* Should work on DEC/OSF (out of the box), and NetBSD (not smooth
+	  yet)
+	* The use glenz option (screen menu) is no longer supported
+	* Fixes for bugs introduced in 0.6d:
+	  - CFLAGS were overwritten by optimisation flags in configure
+	  - work around the non-exiting check for realloc on DEC/OSF
+	  - Bonus texts were only displayed for the purple player
+
+Heroes 0.6d	November 16, 2000
+
+	* New aliases can be added to the sound config files, they will
+	  be shown in the jukebox
+	* New options:
+	  --list=sound-tracks: list the configured sound tracks
+	  --list=debug: show the debug channels
+	* Spelling errors in debug channels or file resources
+	  are reported as `possible misspelling of xxx'
+	* Bug fixes:
+	  - timer reads could leads to quasi-infinite loop
+	  - etc/heroesrc was not installed under share/heroes
+	  - the internal level editor was unable to load levels generated
+	    by the DOS version (such as the levels from heroes-data)
+	  - -fstrict-aliasing is not recognized by any gcc
+	  - LDFLAGS could be erased in configure.in in some conditions
+	* New configure option:
+	  --enable-gprof
+	* Major internal changes:
+	  - new sprite drawing interface (a large part of the code
+	    has been converted to it)
+	  - base directory cleaned up
+
+Heroes 0.6c	October 20, 2000
+
+	* New option:
+	  --list: show various internal information
+	* Obsoleted option:
+	  --drivers-info
+	* Internal changes:
+	  - many cleanups
+
+Heroes 0.6b	October 5, 2000
+
+        * More Win32 support, again.
+       	* Distribute VisualC projects files (in arch/VisualC/).
+	* REMOVED configure options:
+	  --disable-user-config
+	  --disable-user-scores
+	  --disable-user-saves
+	  They are superseded by the options-file, scores-file
+	  and games-file resources. See src/etc/heroesrc.
+	* Renamed options:
+	  -q is now -i.
+	* New options:
+	  -v, --verbose: debug output.
+	  -q, --quiet: suppress warnings.
+	  -Q, --really-qiet: suppress errors.
+	* Bugs fixed:
+	  - Tunnels didn't work on bigendian machines.
+	  - A subtle bug in a configure macro prevented SDL_mixer
+	    to be found if the detection of GGI failed.
+	  - A couple of memory leaks.
+	* Internal changes:
+	  - configure macros moved to m4/
+	  - fading code rewritten
+	  - ./configure --enable-debug will enable a pile of compile checks.
+
+Heroes 0.6a	September 19, 2000
+
+        * Better support for Win32:
+          - more accurate timing
+          - working full screen
+          - should be easier to compile without any Unix layer
+	* Closing window is now handled with SDL
+	* Stronger checks for libMikMod and SDL
+	* New option:
+          -e: display only even lines (try -2e !)
+	* Bugs fixed:
+	  - correct usage of --host for cross-compiling
+	  - --double and --triple were not handled correctly
+	  - memory leaks
+	  - the "Quit yes/no" screen was called in a loop on some machines
+	  - src/etc/heroesrc was doubled
+	  - building of html files was not handled correctly
+
+Heroes 0.6	September 2, 2000
+
+	* heroes has been split in four packages, with different
+	  version numbering and release schedules.
+	   - heroes:               source code, documentation
+	   - heroes-data:          level maps, graphics
+	   - heroes-sound-track:   sound tracks
+	   - heroes-sound-effects: sound effects
+	* SDL_mixer support (as an alternative for LibMikMod).
+	* Options, games, and scores are saved as soon as possible,
+	  not only on exit.
+	* Option list reordered in help screen and man page.
+	* Filenames are handled internally via aliases that can
+	  be overridden with the `setrsc:' command in heroesrc.
+	* Filenames from sound configuration files not beginning by `/'
+	  are relative to the configuration file directory.
+	* Filename given after a `soundconf:' command are subject
+	  to alias expansion (e.g. `$(data-dir)/mod/sound.conf').
+	* New run-time options:
+	  -2: double display size (slow)
+	  -3: triple display size (slower)
+	  -S: disable sound
+	  -X: disable sfx (not new, but was undocumented)
+	* New environment variables:
+	  HEROES_DEBUG:    control debugging output
+	  HEROES_DATA_DIR: permit relocation of the game
+	* New configure options:
+          --enable-html-doc[=DIR]:  build and install html documentation
+	  --disable-heroes-debug:   disable support for HEROES_DEBUG
+	  --with-mikmod:	    link with LibMikMod
+	  --with-sdl_mixer:	    link with SDL_Mixer
+	* Bugs fixed:
+	  - -q option wasn't handled
+	  - keysdef-inc.h was not build if --with-sdl or --with-GGI
+	    were given an argument
+	  - keysdef-inc.h included wrong SDL header
+	  - typos in the game texts and in the documentation
+	  - endian bugs in timing code
+	  - -DDEBUG was not in CFLAGS if the user specified
+	    her own CFLAGS at configure time.
+	  - mouse support for SDL 1.0.x was missing.
+	  - a ./configure test was broken due to unquoted
+	    variable substitution.
+	  - some more big-endian issues have been fixed
+	  - some unaligned memory access have been removed
+	* Internal major changes:
+	  - new directory lib/ for utility and compatibility functions.
+	  - timer code fully rewritten
+
+Heroes 0.5	July 22, 2000
+
+	* Level editor integration.
+	* Documentation updates.
+	* Sound configuration files allow specification of played
+          sound-tracks (`soundconf:' in ~/.heroes/heroesrc).
+	* New options:
+	  -8: 8bits audio
+	  -q: high quality mixer
+	  -F: full screen video (where available)
+	* Preliminary support for big-endian machines [untested]
+	* Handle multiple extra level directories (`extradir:' in
+	  ~/.heroes/heroesrc).
+	* Bugs fixed:
+	  - configure went wrong on joystick tests when GGI was not
+	    available and SDL didn't have joystick support.
+	  - `make distclean' did not remove all generated files.
+	  - VPATH build did not work.
+	  - --gfx-options used to segfault.
+	* Minor improvements:
+	  - Allow <PAUSE> to continue paused games.
+	  - With SDL, the --gfx-options will set SDL_VIDEODRIVER.
+
+Heroes 0.4	July 3, 2000
+
+	* Simple DirectMedia Layer (SDL) support.
+	* Texinfo documentation.
+	* `setenv:' command in ~/.heroes/heroesrc.
+	* ./configure --disable-joystick.
+
+Heroes 0.3	June 24, 2000
+
+	* Joystick support.
+	* Support of options specification in ~/.heroes/heroesrc.
+	* Sound driver selection via -n and -d options.
+	* LibGGI configuration via --ggi-display option.
+	* Handling of music and sfx volume configuration.
+	* Smarter keyboard configurator.
+	* ./configure --enable-mem-debug will link with dmalloc
+	  or electric fence.
+
+Heroes 0.2	June 3, 2000
+
+	* Support for non-8bits video mode (thanks to Pierre Baillet).
+	* Sound effects now works.
+	* Options, scores, and saved games are now written in
+	  the ~/.heroes/ user directory (old behaviour still available
+	  with ./configure options).
+	* Better keycode handling.  Report correct keysyms
+	  in the KEYS menu.
+	* Improved ./configure options to specify LibGGI location.
+	* Bugs fixed:
+	  - a buffer overflow in pixelize
+          - backspace and delete didn't work in console
+	  - the `orange vertical line' when playing a two player game
+
+Heroes 0.1	May 25, 2000
+
+	* First release under GNU/Linux.
+
+Local Variables:
+mode: indented-text
+End:

@@ -1,0 +1,102 @@
+autogen definitions debugchn;
+/*------------------------------------------------------------------------.
+| Copyright 2001  Alexandre Duret-Lutz <duret_g@epita.fr>                 |
+|                                                                         |
+| This file is part of Heroes.                                            |
+|                                                                         |
+| Heroes is free software; you can redistribute it and/or modify it under |
+| the terms of the GNU General Public License as published by the Free    |
+| Software Foundation; either version 2 of the License, or (at your       |
+| option) any later version.                                              |
+|                                                                         |
+| Heroes is distributed in the hope that it will be useful, but WITHOUT   |
+| ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or   |
+| FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License   |
+| for more details.                                                       |
+|                                                                         |
+| You should have received a copy of the GNU General Public License along |
+| with this program; if not, write to the Free Software Foundation, Inc., |
+| 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                   |
+`------------------------------------------------------------------------*/
+
+/*
+** channel attributes:
+** -------------------
+**  name:  name of the channel
+**  descr: short description for --list=debug output (beware, this is
+**         iternationalized)
+**  doc:   long description for the manual (this default to the value
+**         for `descr', capitalized, and with an final point added).
+*/
+
+channel = {
+	name  = section;
+	descr = "different parts of the game";
+	doc   = "The different parts of the game (introduction, \n"
+		"demonstration, menus, ...).";
+};
+
+channel = {
+	name  = system;
+	descr = "system related messages";
+	doc   = "Handling of environment variables, creation of \n"
+		"directories, initialization of libraries.";
+
+};
+
+channel = {
+	name  = resource;
+	descr = "filename resources handling";
+};
+
+channel = {
+	name  = file;
+	descr = "files and directories handling";
+};
+
+channel = {
+	name  = level;
+	descr = "levels handling";
+};
+
+channel = {
+	name  = sound_track;
+	descr = "sound track events";
+};
+
+channel = {
+	name  = sound_effect;
+	descr = "sound effects events";
+};
+
+channel = {
+	name  = video;
+	descr = "communication with the display driver";
+	doc   = "Events related to the display interface.";
+};
+
+channel = {
+	name  = joystick;
+	descr = "joystick initialization and events";
+};
+
+channel = {
+	name  = timer;
+	descr = "timer handling";
+};
+
+channel = {
+	name  = misc;
+	descr = "miscellaneous events";
+};
+
+channel = {
+	name  = fader;
+	descr = "palette fade events";
+};
+
+channel = {
+	name  = bonus;
+	descr = "bonus";
+	doc   = "Bonus handling.";
+};

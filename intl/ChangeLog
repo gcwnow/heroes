@@ -1,0 +1,12 @@
+2001-04-24  Alexandre Duret-Lutz  <duret_g@epita.fr>
+
+	* dcigettext.c (HAVE_LOCALE_NULL): Don't define even if
+	__GNU_LIBRARY__	is defined.  Otherwise guess_category_value()
+	uses glibc's setlocale() which make the libintl dependant
+	on the glibc configuration and prevent testing the package with
+	foreign languages.
+
+2001-09-13  GNU  <bug-gnu-utils@gnu.org>
+
+	* Version 0.10.40 released.
+

@@ -1,0 +1,51 @@
+This directory hold some code to interface with the various supported
+third party libraries related to media (GGI, SDL, MikMod, etc.)
+
+Media have been separated into 3 groups:
+
+ - VKM : Video/Keyboard/Mouse interface
+ - J   : Joystick interface
+ - S   : Sound interface
+
+Each supported library can belong to one or more of these groups.
+
+Each library is represented by a directory which contains the
+interfaces implementation for the supported groups of media.  Each
+driver is built as a static library named libhXXXY.a where XXX are the
+three first letters of the library interfaced with (e.g. 'mik' for
+MikMod), and Y is the name of the media group ('vkm', 'j', or 's').
+For instance libhsdlj.a is Heroes' interface to the SDL joystick
+functions.
+
+Which driver will be built is decided by ./configure after probing for
+available libraries.  See m4/h-media.m4.  The setup is comparable to
+Autoconf's `LIBOBJ' idiom, except we are selecting libraries to be
+built instead of object files.
+
+One extra directory, 'dummy/', contains a fake driver for each group
+of media.  Since Heroes obviously needs a driver for each of these
+groups, the 'dummy' drivers will be used in case no other one is
+available.
+
+Code common to all drivers in a group is placed directly is the media/
+direvtory (i.e. not any subdirectory) and built as a single library
+for all groups: libhmcommon.a.
+
+
+
+This setup (building all interfaces as many static libraries) offers
+some advantages over the previous one (conditional compilation in the
+relevant part of the game).  First, it makes adding support for new
+libraries is easier and cleaner.  But it also has a quite nice
+property: because every dependence over third party library is isolated in
+static libraries, you don't need to recompile the whole game after a
+reconfiguration; typically:
+
+  % ./configure --with-sdl
+  % make                    # build everything if it's the first time
+  % ./configure --with-ggi
+  % make                    # build only a couple of media libraries (the GGI
+                              interfaces) and relink heroes.
+
+This can be quite useful when building several configurations of
+Heroes.

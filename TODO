@@ -1,0 +1,120 @@
+Tasks for Heroes.  If you think something is missing here,
+please send a note to <heroes-discuss@lists.sourceforge.net>.
+
+* Use the level-loading library in the level editor, so as to get rid
+  of most struct in src/struct.h (and their ugly ATTRIBUTE_PACKED).
+  This require makeing the level editor work with libhlvl (see
+  src/lvl/README for more details).
+
+* Add `FIXME: obscure' comments at will, so I know where comments or
+  rewrite is really important.  (Actually this can be done by anyone
+  reading the code.)
+
+* Check dependencies.  Heroes >= 0.11 requires heroes-data >= 1.1,
+  Heroes >= 0.18 requires heroes-data >= 1.4.  Heroes will abort with a
+  "cannot open file X" message on error.  These is definitely some room
+  for improvement here.
+
+* The code is VERY UGLY and needs to be cleaned up.
+
+* hedlite.c should be cleaned.
+
+* If possible, Get rid of GETWORD, SETWORD and Cie, see src/endian.h.
+
+* The default installation path on BeOS should not be /usr/local (?).  I need
+  some more input about this.
+
+* There are several comments in French.  They should be translated.
+
+* Check every place were filenames are used, use buffer allocated dynamically.
+
+* Split heroes.c
+
+* Split hedlite.c
+
+* const.[ch] should not exist.
+
+* Use {u,s}{8,16,32}_t types where it's important.
+
+* __attribute__ ((packed)) is a gcc-isms, something must be done to avoid
+  them. `something' may be using a different level format, in which case
+  the `heroeslvl' above would be helpful.
+
+* Add an option that add a new life each time you start a new level.
+  Suggested by Samuel Tardieu (sam@infres.enst.fr).
+
+* Programmable vehicles (for CPU controlled ones) would be nice.  It
+  would be fun to link with Guile and control the vehicles in scheme.
+  Or in Python.  Or in C (using shared libraries like pluggins).
+
+* The external editor could be ported too, this
+  would need many many more work.  (It's probably easier to rewrite it
+  from scratch or from hedlite.c.)
+
+* Network support.
+
+* Direct X11 support would be nice.
+
+* What is the effect of removing the DMODE_SOFT_MUSIC from MikMod options ?
+
+* Would Hermes be faster than LibGGI's crossblit ?
+
+* Redesign the way menus are handled internally.
+
+* Write assembly routines for stretching code.
+
+* Use makeheaders ? (provided I can get in touch with its maintainer)
+
+* Load GGI, SDL, and MikMod libraries dymically (i.e. select
+  available library at run-time versus configure-time).  This is probably
+  easier to do now, with the new way media libraries are handled.
+
+* Proof-read the documentation.
+
+* Full screen support with Allegro.  Is it possible?
+
+* It would be nice to have the argument processing and argument
+  documentation of `heroes' and `heroeslvl' generated automatically
+  from a definition file (well, two definition files, one for each
+  program) using AutoGen.  AutoGen ships with a tools called AutoOpts
+  that performs a similar task, but I find the result horrible.  Our
+  command line parsing code should follow the Gnits standards and use
+  getopt_long.  (Such alternate tool is on the TODO list of AutoGen,
+  so it might be contribued back.)
+
+* The end-scroller used to be an end-scroller :) Now it's just a
+  screen that display "THE END".  That's not really rewarding for the
+  player.  It would be nice to have something more delighting here.
+
+* Heroes-data should ships with 100 levels, shouldn't it? (There is
+  only 94 levels, IIRC.)
+
+* There are some "extra" levels in heroes/src/extralvl/ on CVS.  Do
+  they deserve some packaging?
+
+* There are some hq modules packaged in http://heroes.sf.net/dl/misc/
+  Should they be packaged in a more "official" way?
+
+* Some files #include too much headers (for historical reasons), this
+  slows down compilation times.  That's quite unrelated to Heroes, but
+  a tool that can figure which #include are superfluous would be
+  appreciated by several people I have talked to.
+
+* The "AI", if I may call this "AI" (see `ia_*' functions in heroes.c, but
+  have some aspirin handy) is ABSOLUTELY HORRIBLE.  It's using a very
+  stupid and inefficient recursive algorithm.  `A*' is not usable as-is
+  with the current path evaluation functions, but maybe these heuristics
+  can be changed too.  A better "AI" have been required several times in
+  the comments about Heroes on www.happypenguin.org.
+
+* Heroes is relocatable (the manual explains that), but heroeslvl isn't.
+
+* The paragraph formater (parafmt.c), has two minor issues: it does
+  not handle a paragraph with leading spaces (i.e. first line is
+  indented) properly, and will probably fail to format a paragraph where
+  one word is larger than one of the line (even if that's not the line
+  the word is finally put on).
+
+* Improve the test suite (whatever you think it can mean).
+
+* Add more items to this TODO list.
