@@ -71,6 +71,10 @@ enum {
 #define HK_CtrlL (key_codes[HK_CtrlL_])
   HK_CtrlR_,
 #define HK_CtrlR (key_codes[HK_CtrlR_])
+  HK_AltL_,
+#define HK_AltL (key_codes[HK_AltL_])
+  HK_AltR_,
+#define HK_AltR (key_codes[HK_AltR_])
   HK_D_,
 #define HK_D (key_codes[HK_D_])
   HK_d_,

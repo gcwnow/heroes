@@ -805,7 +805,7 @@ play_menu (void)
 	  else
 	    l = 0;
 	}
-	if (t == HK_Escape) {
+	if (t == HK_Escape || t == HK_AltL) {
 	  if (l != 7) {
 	    l = 7;
 	    event_sfx (1);
@@ -814,7 +814,7 @@ play_menu (void)
 	}
       } else
 	t = 0;
-    } while (t != HK_Enter);
+    } while (t != HK_Enter && t != HK_CtrlL);
     if (l == 0) {
       event_sfx (5);
       two_players ^= 1;
@@ -846,15 +846,15 @@ play_menu (void)
 	  }
 	} else
 	  t = 0;
-	if (t == HK_Enter && saverec[u].used == 0) {
+	if ((t == HK_Enter || t == HK_CtrlL) && saverec[u].used == 0) {
 	  event_sfx (18);
 	  t = 0;
 	}
-      } while (t != HK_Enter && t != HK_Escape);
+      } while (t != HK_Enter && t != HK_CtrlL && t != HK_Escape && t != HK_AltL);
       if (t == HK_Escape) {
 	event_sfx (8);
       }
-      if (t == HK_Enter)
+      if (t == HK_Enter || t == HK_CtrlL)
 	flagload = 1;
     }
   } while (l == 0 || (l == 6 && flagload == 0));
@@ -2598,7 +2598,7 @@ main_menu (void)
 	  else
 	    l = 0;
 	}
-	if (t == HK_Escape) {
+	if (t == HK_Escape || t == HK_AltL) {
 	  if (l != 6)
 	    l = 6;
 	  else
@@ -2648,7 +2648,7 @@ main_menu (void)
 
       } else
 	t = 0;
-    } while (t != HK_Enter);
+    } while (t != HK_Enter && t != HK_CtrlL);
     event_sfx (10 + l);
 
     if (l == 0)

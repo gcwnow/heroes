@@ -44,6 +44,8 @@ const a_keycode key_codes[HK__MAX] = {
   /* HK_BackSpace	*/ SDLK_BACKSPACE,
   /* HK_CtrlL		*/ SDLK_LCTRL,
   /* HK_CtrlR		*/ SDLK_RCTRL,
+  /* HK_AltL		*/ SDLK_LALT,
+  /* HK_AltR		*/ SDLK_RALT,
   /* HK_D		*/ 'D',
   /* HK_d		*/ 'd',
   /* HK_E		*/ 'E',

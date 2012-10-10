@@ -806,7 +806,7 @@ move_updown (a_keycode key, int *pos, int latest_pos)
       ++*pos;
     else
       *pos = 0;			/* wrap */
-  } else if (key == HK_Escape) {
+  } else if (key == HK_Escape || key == HK_AltL) {
     if (*pos != latest_pos)	/* On first escape, */
       *pos = latest_pos;	/* go to the latest line; */
     else			/* on doubled espace, */
@@ -866,7 +866,7 @@ exec_menu (a_menu *menu)
 	k = move_updown (k, &l, menu->lines - 1);
       } else
 	k = 0;
-    } while (k != HK_Enter);
+    } while (k != HK_Enter && k != HK_CtrlL);
     to_call = menu->funcs[l];
 
     if (to_call) {
@@ -901,7 +901,7 @@ control_menu (void)
     if (key_or_joy_ready ()) {
       t = get_key_or_joy ();
       t = move_updown (t, &l, 4);
-      if (t == HK_Right || t == HK_Left || t == HK_Enter) {
+      if (t == HK_Right || t == HK_Left || t == HK_Enter || t == HK_CtrlL) {
 	if (l == 0)
 	  opt.ctrl_one ^= 1;
 	if (l == 1)
@@ -919,7 +919,7 @@ control_menu (void)
       }
     } else
       t = 0;
-  } while (t != HK_Enter || l != 4);
+  } while ((t != HK_Enter && t != HK_CtrlL) || l != 4);
   event_sfx (8);
 }
 
@@ -992,7 +992,7 @@ keyboard_menu (void)
       if (key_or_joy_ready ()) {
 	t = get_key_or_joy ();
 	t = move_updown (t, &l, 12);
-	if (t == HK_Enter && l != 12) {
+	if ((t == HK_Enter || t == HK_CtrlL) && l != 12) {
 	  testing = 1;
 	  event_sfx (6);
 	}
@@ -1050,7 +1050,7 @@ keyboard_menu (void)
 	  break;
 	}
       }
-    if (unconfigured_keys >= 0 && t == HK_Enter && l == 12) {
+    if (unconfigured_keys >= 0 && (t == HK_Enter || t == HK_CtrlL) && l == 12) {
       l = unconfigured_keys;
       if (l == 1)
 	l = 2;
@@ -1061,7 +1061,7 @@ keyboard_menu (void)
       else if (l == 8)
 	l = 7;
     }
-  } while (t != HK_Enter || l != 12);
+  } while ((t != HK_Enter && t != HK_CtrlL) || l != 12);
   event_sfx (8);
 }
 
@@ -1100,7 +1100,7 @@ sound_menu (void)
       if ((!opt.music && l == 1) || (!opt.sfx && l == 3))
 	t = move_updown (t, &l, 4);
 
-      if (t == HK_Right || t == HK_Left || t == HK_Enter) {
+      if (t == HK_Right || t == HK_Left || t == HK_Enter || t == HK_CtrlL) {
 	if (l != 4) {
 	  if (l & 1)
 	    event_sfx (4);
@@ -1128,7 +1128,7 @@ sound_menu (void)
 	if (l == 3 && opt.sfx_volume < 12)
 	  opt.sfx_volume++;
       }
-      if (t == HK_Enter) {
+      if (t == HK_Enter || t == HK_CtrlL) {
 	if (l == 0)
 	  opt.music ^= 1;
 	if (l == 1) {
@@ -1149,7 +1149,7 @@ sound_menu (void)
       adjust_volume ();
     } else
       t = 0;
-  } while (t != HK_Enter || l != 4);
+  } while ((t != HK_Enter && t != HK_CtrlL) || l != 4);
   event_sfx (8);
 }
 
@@ -1181,7 +1181,7 @@ screen_menu (void)
     if (key_or_joy_ready ()) {
       t = get_key_or_joy ();
       t = move_updown (t, &l, 4);
-      if (t == HK_Right || t == HK_Left || t == HK_Enter)
+      if (t == HK_Right || t == HK_Left || t == HK_Enter || t == HK_CtrlL)
 	if (l < 5) {
 	  if (l == 0)
 	    opt.radar_map ^= 1;
@@ -1203,7 +1203,7 @@ screen_menu (void)
 	}
     } else
       t = 0;
-  } while (t != HK_Enter || l != 4);
+  } while ((t != HK_Enter && t != HK_CtrlL) || l != 4);
   event_sfx (8);
 }
 
@@ -1242,14 +1242,14 @@ game_menu (void)
     if (key_or_joy_ready ()) {
       t = get_key_or_joy ();
       t = move_updown (t, &l, 5);
-      if (t == HK_Right || t == HK_Left || t == HK_Enter)
+      if (t == HK_Right || t == HK_Left || t == HK_Enter || t == HK_CtrlL)
 	if (l != 6) {
 	  if ((l == 3) || (l == 4))
 	    event_sfx (4);
 	  else
 	    event_sfx (5);
 	}
-      if (t == HK_Right || t == HK_Enter) {
+      if (t == HK_Right || t == HK_Enter || t == HK_CtrlL) {
 	if (l == 3) {
 	  if (opt.speed < 2)
 	    opt.speed++;
@@ -1313,7 +1313,7 @@ game_menu (void)
       }
     } else
       t = 0;
-  } while (t != HK_Enter || l != 5);
+  } while ((t != HK_Enter && t != HK_CtrlL) || l != 5);
   event_sfx (8);
 }
 
@@ -1427,20 +1427,20 @@ extra_menu (void)
 	    l = 3;
 	}
       }
-      if (t == HK_Escape) {
+      if (t == HK_Escape || t == HK_AltL) {
 	if (l != 3)
 	  l = 3;
 	else
 	  t = HK_Enter;
       }
-      if (t == HK_Right || t == HK_Left || t == HK_Enter)
+      if (t == HK_Right || t == HK_Left || t == HK_Enter || t == HK_CtrlL)
 	if (l != 3) {
 	  if (l < 2)
 	    event_sfx (5);
 	  else
 	    event_sfx (3);
 	  if (l == 0) {
-	    if (t == HK_Enter || t == HK_Right) {
+	    if (t == HK_Enter || t == HK_CtrlL || t == HK_Right) {
 	      opt.extras = ((opt.extras == 2) ? 0 : (opt.extras + 1));
 	    } else if (t == HK_Left) {
 	      opt.extras = ((opt.extras == 0) ? 2 : (opt.extras - 1));
@@ -1453,7 +1453,7 @@ extra_menu (void)
 	}
     } else
       t = 0;
-  } while (t != HK_Enter || l != 3);
+  } while ((t != HK_Enter && t != HK_CtrlL) || l != 3);
   event_sfx (8);
 
   /* Free all levelnames. */
@@ -1492,7 +1492,7 @@ quit_menu (void)
       t = move_updown (t, &l, 1);
     } else
       t = 0;
-  } while (t != HK_Enter);
+  } while (t != HK_Enter && t != HK_CtrlL);
   if (l == 1) {
     event_sfx (77);
     return (0);
@@ -2055,7 +2055,7 @@ jukebox_keys (int *pos, int *top)
 	++*pos;
       else
 	*pos = 0;
-    } else if (k == HK_Enter) {
+    } else if (k == HK_Enter || k == HK_CtrlL) {
       if (*pos == 2)
 	k = HK_Escape;
       else {
@@ -2184,7 +2184,7 @@ quit_yes_no (void)
       t = move_updown (t, &l, 1);
     } else
       t = 0;
-  } while (t != HK_Enter);
+  } while (t != HK_Enter && t != HK_CtrlL);
   adjust_volume ();
   enable_blit = 0;
   if (l == 0)
@@ -2310,7 +2310,7 @@ enter_your_name (char c, char* name)
 	FREE_SPRITE0 (player_name); // force recompilation
       }
     } */
-  } while (t != HK_Escape && t != HK_Enter);
+  } while (t != HK_Escape && t != HK_Enter && t != HK_CtrlL);
   event_sfx (72);
   if (pos == 0 || t == HK_Escape)
     memset (name, 0, PLAYER_NAME_SIZE);
@@ -2567,7 +2567,7 @@ scores_menu (void)
 	rollflag = -1;
       rolldec = 320;
     }
-  } while (t != HK_Escape);
+  } while (t != HK_Escape && t != HK_AltL);
   event_sfx (8);
 
   for (i = 0; i < 5; ++i)
@@ -2605,6 +2605,6 @@ help_menu (void)
     } else {
       t = 0;
     }
-  } while (t != HK_Escape);
+  } while (t != HK_Escape && t != HK_AltL);
   event_sfx (8);
 }
