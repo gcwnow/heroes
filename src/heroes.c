@@ -851,7 +851,7 @@ play_menu (void)
 	  t = 0;
 	}
       } while (t != HK_Enter && t != HK_CtrlL && t != HK_Escape && t != HK_AltL);
-      if (t == HK_Escape) {
+      if (t == HK_Escape || t == HK_AltL) {
 	event_sfx (8);
       }
       if (t == HK_Enter || t == HK_CtrlL)
@@ -2493,7 +2493,7 @@ play_demo (void)
       if (is_joystick_button_b (1) && enable_blit)
 	notbyebye = 0;
 
-    if (keyboard_map[HK_Escape] && enable_blit)
+    if ((keyboard_map[HK_Escape] || keyboard_map[HK_AltL]) && enable_blit)
       notbyebye = 0;
 
     if (!(notbyebye && level_is_finished == 0) && fade_stat == F_UNKNOWN) {
@@ -2584,7 +2584,7 @@ main_menu (void)
 	  t = get_key_or_joy ();
 	else
 	  t = 0;
-	if (t == HK_Up || t == HK_Down || t == HK_Escape)
+	if (t == HK_Up || t == HK_Down || t == HK_Escape || t == HK_AltL)
 	  event_sfx (1);
 	if (t == HK_Up) {
 	  if (l > 0)
@@ -2986,7 +2986,7 @@ play_game (char cont)
     if (opt.ctrl_one ^ opt.ctrl_two)
       if (is_joystick_button_b (1) && enable_blit)
 	notbyebye = quit_yes_no ();
-    if (keyboard_map[HK_Escape] && enable_blit)
+    if ((keyboard_map[HK_Escape] || keyboard_map[HK_AltL]) && enable_blit)
       notbyebye = quit_yes_no ();
   } while (notbyebye && level_is_finished == 0);
 
@@ -3053,7 +3053,7 @@ play_game (char cont)
 	    flag = 0;
 	}
       }
-      if (l == 1 && (t == HK_Enter || flag == 0) && game_mode == M_QUEST) {
+      if (l == 1 && (t == HK_Enter || t == HK_CtrlL || flag == 0) && game_mode == M_QUEST) {
 	event_sfx (67);
 	load_save_records ();
 	t = 0;
@@ -3095,7 +3095,7 @@ play_game (char cont)
 		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
 		write_save_one_record (l);
 	      }
-	      if (t == HK_Enter) {
+	      if (t == HK_Enter || t == HK_CtrlL) {
 		editflag = 1;
 		strcpy (tmpname, saverec[l].name);
 		pos = strlen (saverec[l].name);
@@ -3104,7 +3104,7 @@ play_game (char cont)
 		event_sfx (125);
 		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
 	      }
-	      if (t == HK_Escape)
+	      if (t == HK_Escape || t == HK_AltL)
 		event_sfx (123);
 	    } else {
 	      t = get_key_or_joy ();
@@ -3130,7 +3130,7 @@ play_game (char cont)
 		event_sfx (127);
 		editflag = 2;
 		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
-	      } else if (t == HK_Escape) {
+	      } else if (t == HK_Escape || t == HK_AltL) {
 		strcpy (saverec[l].name, tmpname);
 		event_sfx (123);
 		editflag = 2;
@@ -3151,10 +3151,10 @@ play_game (char cont)
 	      }
 	    }
 	  }
-	} while ((t != HK_Escape && t != HK_Enter) || editflag != 0);
+	} while ((t != HK_Escape && t != HK_AltL && t != HK_Enter && t != HK_CtrlL) || editflag != 0);
 	/* while (keyboard_map[HK_Escape]) process_input_events (); */
 	l = 1;
-      } else if (t == HK_Escape) {
+      } else if (t == HK_Escape || t == HK_AltL) {
 	if (joystick_detected & 1)
 	  do
 	    get_joystick_state ();
@@ -3163,7 +3163,7 @@ play_game (char cont)
 	  l = 255;
       }
     } while ( /*keyboard_map[HK_Escape]==0 */ l != 255
-	     && ((t != HK_Enter && flag) || l == 1));
+	     && ((t != HK_Enter && t != HK_CtrlL && flag) || l == 1));
     init_keyboard_map ();
 
     if (l == 255 || game_mode == M_QUEST) {
@@ -3227,16 +3227,16 @@ play_game (char cont)
 	  corner[0] = tmp;
 	  flush_display2 (corner[0], corner[1]);
 	}
-	if (! keyboard_map[HK_Enter])
+	if (! keyboard_map[HK_Enter] && ! keyboard_map[HK_CtrlL])
 	  flag = 0;
 	output_screen ((char) n);
 	process_input_events ();
 	n = update_all (1);
-	if (keyboard_map[HK_Escape])
+	if (keyboard_map[HK_Escape] || keyboard_map[HK_AltL])
 	  if (quit_yes_no () == 0)
 	    l = 255;
       } while ( /*! keyboard_map[HK_Escape] */ l != 255
-	       && (flag || ! keyboard_map[HK_Enter]));
+	       && (flag || (! keyboard_map[HK_Enter] && ! keyboard_map[HK_CtrlL])));
 /*   if (keyboard_map[HK_Escape]) l=255; */
 
       if (l == 0)
