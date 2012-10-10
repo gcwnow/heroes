@@ -2856,6 +2856,7 @@ play_game (char cont)
   int n, i;
   a_keycode t;
   char notbyebye = 1, flag;
+  char nameChar = 65;
   int l = 0, pos, u;
   char editflag = 0;
   static char tmpname[20];
@@ -3106,7 +3107,75 @@ play_game (char cont)
 	      }
 	      if (t == HK_Escape || t == HK_AltL)
 		event_sfx (123);
-	    } else {
+	    } else { /* New arcade style input */
+		t = get_key_or_joy ();
+
+		if(t == HK_Up) {
+			nameChar++;
+			if(nameChar > 90) {
+				nameChar = 65;
+			}
+		}
+		else if(t == HK_Down) {
+			nameChar--;
+			if(nameChar < 65) {
+				nameChar = 90;
+			}
+		}
+		else if(t == HK_Left) {
+			saverec[l].name[pos] = 0;
+			event_sfx (122);
+			FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+			pos--;
+			if(pos < 0) {
+				pos = 0;
+			}
+			nameChar = (char)saverec[l].name[pos];
+		}
+		else if(t == HK_Right) {
+			pos++;
+			if(pos > 13) {
+				pos = 13;
+			}
+			if(saverec[l].name[pos] == 0) {
+				nameChar = 65;
+			}
+			else {
+				nameChar = (char)saverec[l].name[pos];
+			}
+		}
+		else if (t == HK_Escape || t == HK_AltL) {
+			strcpy (saverec[l].name, tmpname);
+			event_sfx (123);
+			editflag = 2;
+			FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		}
+		else if (t == HK_Enter || t == HK_CtrlL) {
+			//saverec[l].name[pos - 1] = 0;
+			nameChar = 65;
+			saverec[l].level = current_quest_level /*+1 */ ;
+			for (u = 0; u < 4; u++) {
+			  saverec[l].points[u] = player[col2plr[u]].score;
+			  copy_gameid (saverec[l].gid, game_id);
+			  saverec[l].lifes[u] = player[col2plr[u]].lifes;
+			}
+			saverec[l].used = 1;
+			editflag = 0;
+			event_sfx (124);
+			write_save_one_record (l);
+			FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		}
+
+		if((int)nameChar != saverec[l].name[pos])
+		{
+			saverec[l].name[pos] = (int)nameChar;
+			event_sfx (121);
+			FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		}
+
+	    }
+	    /* Old input method */
+	    /* } else {
 	      t = get_key_or_joy ();
 	      u = keycode_to_ascii (t);
 	      pos = strlen (saverec[l].name);
@@ -3118,26 +3187,26 @@ play_game (char cont)
 		  saverec[l].name[pos] = '^';
 		  saverec[l].name[pos + 1] = 0;
 		  event_sfx (121);
-		  FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		  FREE_SPRITE0 (saverec_name[l]); // force recompilation
 		}
 	      if ((t == HK_BackSpace || t == HK_Delete) && (pos > 1)) {
 		saverec[l].name[pos - 1] = 0;
 		saverec[l].name[pos - 2] = '^';
 		event_sfx (122);
-		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
-	      } else if (t == 0x1c0a) { /* FIXME: choose a keysym to use */
+		FREE_SPRITE0 (saverec_name[l]); // force recompilation
+	      } else if (t == 0x1c0a) { // FIXME: choose a keysym to use
 		saverec[l].name[pos - 1] = 0;
 		event_sfx (127);
 		editflag = 2;
-		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		FREE_SPRITE0 (saverec_name[l]); // force recompilation
 	      } else if (t == HK_Escape || t == HK_AltL) {
 		strcpy (saverec[l].name, tmpname);
 		event_sfx (123);
 		editflag = 2;
-		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		FREE_SPRITE0 (saverec_name[l]); // force recompilation
 	      } else if (t == HK_Enter) {
 		saverec[l].name[pos - 1] = 0;
-		saverec[l].level = current_quest_level /*+1 */ ;
+		saverec[l].level = current_quest_level; // +1
 		for (u = 0; u < 4; u++) {
 		  saverec[l].points[u] = player[col2plr[u]].score;
 		  copy_gameid (saverec[l].gid, game_id);
@@ -3147,9 +3216,9 @@ play_game (char cont)
 		editflag = 0;
 		event_sfx (124);
 		write_save_one_record (l);
-		FREE_SPRITE0 (saverec_name[l]); /* force recompilation */
+		FREE_SPRITE0 (saverec_name[l]); // force recompilation
 	      }
-	    }
+	    } */
 	  }
 	} while ((t != HK_Escape && t != HK_AltL && t != HK_Enter && t != HK_CtrlL) || editflag != 0);
 	/* while (keyboard_map[HK_Escape]) process_input_events (); */

@@ -2291,7 +2291,7 @@ enter_your_name (char c, char* name)
 	    FREE_SPRITE0 (player_name); /* force recompilation */
     }
 
-    /* Old keyboard input */
+    /* Old input method */
     /*if (key_ready ()) {
       t = get_key ();
       if (pos < PLAYER_NAME_SIZE) {
